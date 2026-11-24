@@ -240,7 +240,7 @@ nav a:hover{color:var(--ink)}
 .hero .role{font-size:14px;color:var(--ok);font-weight:600;letter-spacing:.02em}
 .hero h1{font-size:clamp(28px,4.2vw,40px);line-height:1.12;letter-spacing:-.02em;font-weight:700;margin-top:6px}
 .hero p.lead{margin-top:12px;font-size:17px;color:var(--mute);max-width:660px}
-.cta{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.cta{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-block;padding:9px 18px;border-radius:999px;font-size:14.5px;font-weight:500;text-decoration:none;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;font-family:inherit}
 .btn.dark{background:var(--ink);color:#fff}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:26px}
@@ -329,7 +329,7 @@ def page(L):
     o.append('<style>%s</style>\n</head>\n<body>' % CSS)
     nav = ''.join('<a class="nl" href="%s">%s</a>' % (h, E(t)) for h, t in L['nav'])
     o.append('<header class="top"><div class="wrap"><b>%s</b><nav>%s<div class="lang"><span>%s</span><a href="%s" onclick="%s">%s</a></div></nav></div></header>' % (E(L['name']), nav, L['cur_label'], L['alt_url'], setlang, L['alt_label']))
-    o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn dark" href="#experience">%s</a><a class="btn" href="#projects">%s</a><a class="btn" href="https://t.me/andrew_727">%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), E(L['lead']), E(L['b_exp']), E(L['b_proj']), E(L['b_tg'])))
+    o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><div class="cta"><a class="btn dark" href="#experience">%s</a><a class="btn" href="#projects">%s</a><a class="btn" href="https://t.me/andrew_727">%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), E(L['b_exp']), E(L['b_proj']), E(L['b_tg'])))
     for i, (b, t) in enumerate(L['facts']):
         st = ' style="border-top:3px solid %s"' % BRAND[i]['c'] if i < 2 else ''
         o.append('<div class="fact"%s><b>%s</b><span>%s</span></div>' % (st, E(b), E(t)))
