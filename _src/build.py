@@ -43,10 +43,10 @@ RU = dict(
  title='Андрей Перепечай — Product Owner & Project Manager',
  desc='Product Owner. Корпоративные ИТ-проекты, пять собственных продуктов: задача, роль, результат.',
  alt_url='/en/', alt_label='EN', cur_label='RU',
- nav=[('#experience','Опыт'),('#projects','Проекты'),('#skills','Навыки'),('#contact','Контакты')],
+ nav=[('#projects','Продукты'),('#experience','Проекты'),('#skills','Навыки'),('#contact','Контакты')],
  role='Product Owner & Project Manager',
  lead='Project Manager в банковском и корпоративном IT: проекты с бюджетом более 250 млн руб., 3 команды разработки (около 30 человек). Закрыл 5 квартальных поставок подряд в срок и в согласованном объёме. Вёл два ИИ-продукта: корпоративную базу знаний с нейросетевым поиском на 20 000 пользователей и ML-сервис прогнозирования для казначейства. Использую нейросети в работе: сократил подготовку отчётности в 4 раза, сам запускаю продукты без команды.',
- b_exp='Опыт работы', b_proj='Проекты', b_tg='Telegram',
+ b_exp='Проекты', b_proj='Продукты', b_tg='Telegram',
  facts=[('≈260 млн руб.','бюджет платформы банковских взаиморасчётов. 3 команды, около 30 человек. Axenix.'),
         ('≈20 000','пользователей корпоративной базы знаний с нейросетевым поиском. СИБУР.'),
         ('5 продуктов','собственные продукты от идеи до запуска. Один в App Store, одна онлайн-игра с 50+ игроками.')],
@@ -147,10 +147,10 @@ EN = dict(
  title='Andrey Perepechay — Product Owner & Project Manager',
  desc='Product Owner. Enterprise IT projects and five products of my own: problem, role, result.',
  alt_url='/', alt_label='RU', cur_label='EN',
- nav=[('#experience','Experience'),('#projects','Projects'),('#skills','Skills'),('#contact','Contact')],
+ nav=[('#projects','Products'),('#experience','Projects'),('#skills','Skills'),('#contact','Contact')],
  role='Product Owner & Project Manager',
  lead='Project Manager in banking and corporate IT: projects with a budget above 250 million RUB, 3 development teams (about 30 people). Closed 5 quarterly deliveries in a row on time and in the agreed scope. Led two products with AI: a corporate knowledge base with AI search (LLM, RAG) for 20,000 users and an ML forecasting service for treasury. I use AI at work: cut report preparation time by 4 times, and I launch products on my own without a team.',
- b_exp='Experience', b_proj='Projects', b_tg='Telegram',
+ b_exp='Projects', b_proj='Products', b_tg='Telegram',
  facts=[('≈260 M RUB','budget of a bank settlements platform. 3 teams, about 30 people. Axenix.'),
         ('≈20,000','users of a corporate knowledge base with AI search. SIBUR.'),
         ('5 products','my own products from idea to launch. One in the App Store, one online game with 50+ players.')],
@@ -269,6 +269,10 @@ nav a:hover{color:var(--ink)}
 .cta{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-block;padding:9px 18px;border-radius:999px;font-size:14.5px;font-weight:500;text-decoration:none;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;font-family:inherit}
 .btn.dark{background:var(--ink);color:#fff}
+.tabs{display:inline-flex;gap:4px;margin-top:34px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--soft)}
+.tabs button{border:0;background:transparent;padding:9px 22px;border-radius:999px;font:inherit;font-size:15px;font-weight:600;color:var(--mute);cursor:pointer}
+.tabs button.on{background:var(--ink);color:#fff}
+.panel[hidden]{display:none}
 .btn.tg{background:#229ED9;border-color:#229ED9;color:#fff;display:inline-flex;align-items:center;gap:8px;margin-left:auto;font-weight:600;box-shadow:0 4px 14px rgba(34,158,217,.35)}
 .btn.tg:hover{background:#1b8cc2}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:26px}
@@ -358,13 +362,14 @@ def page(L):
     o.append('<style>%s</style>\n</head>\n<body>' % CSS)
     nav = ''.join('<a class="nl" href="%s">%s</a>' % (h, E(t)) for h, t in L['nav'])
     o.append('<header class="top"><div class="wrap"><b>%s</b><nav>%s<div class="lang"><span>%s</span><a href="%s" onclick="%s">%s</a></div></nav></div></header>' % (E(L['name']), nav, L['cur_label'], L['alt_url'], setlang, L['alt_label']))
-    o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn dark" href="#experience">%s</a><a class="btn" href="#projects">%s</a><a class="btn tg" href="https://t.me/andrew_727"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3 18.6 19.6c-.2 1.1-.9 1.3-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6.1 13 1.2 11.5c-1.1-.3-1.1-1 .2-1.5L20.5 2.6c.9-.3 1.7.2 1.4 1.7z"/></svg>%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), E(L['lead']), E(L['b_exp']), E(L['b_proj']), E(L['b_tg'])))
+    o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn dark" href="#projects">%s</a><a class="btn" href="#experience">%s</a><a class="btn tg" href="https://t.me/andrew_727"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3 18.6 19.6c-.2 1.1-.9 1.3-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6.1 13 1.2 11.5c-1.1-.3-1.1-1 .2-1.5L20.5 2.6c.9-.3 1.7.2 1.4 1.7z"/></svg>%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), E(L['lead']), E(L['b_proj']), E(L['b_exp']), E(L['b_tg'])))
     for i, (b, t) in enumerate(L['facts']):
         st = ' style="border-top:3px solid %s"' % BRAND[i]['c'] if i < 2 else ''
         o.append('<div class="fact"%s><b>%s</b><span>%s</span></div>' % (st, E(b), E(t)))
     o.append('</div></section>')
     o.append('<h2 class="sec" id="contact" style="margin-top:36px">%s</h2><div class="contacts"><a href="https://t.me/andrew_727"><small>Telegram</small>@andrew_727</a><a href="mailto:perepechayandrew@gmail.com"><small>Email</small>perepechayandrew@gmail.com</a><a href="tel:+79163448547"><small>%s</small>+7 (916) 344-85-47</a></div>' % (E(L['c_h']), E(L['phone'])))
     # опыт
+    _keep = o; o = []
     o.append('<h2 class="sec" id="experience">%s</h2>' % E(L['exp_h']))
     xl = L['x_lbl']
     for i, x in enumerate(L['exp']):
@@ -375,6 +380,7 @@ def page(L):
         o.append('<div class="xrow"><dt>%s</dt><dd>%s</dd></div>' % (E(xl['resp']), E(x['resp'])))
         o.append('<div class="xrow res"><dt>%s</dt><dd><ul>%s</ul></dd></div></dl></article>' % (E(xl['res']), li(x['res'])))
     # проекты
+    exp_html = ''.join(o); o = []
     o.append('<section class="own" id="projects"><div class="own-h"><h2>%s</h2><span class="cnt">%d</span></div><p class="sub">%s</p><div class="grid">' % (E(L['proj_h']), len(L['projects']), E(L['proj_sub'])))
     pl = L['p_lbl']
     for p in L['projects']:
@@ -382,6 +388,9 @@ def page(L):
             PCOL[p['id']], cover(p['id'], p['alts'][0]), E(p['name']), E(p['desc']), E(pl['role']), E(p['role']), E(pl['stage']), E(p['stage']), E(pl['res']), E(p['res_short']), p['id'], E(pl['more'])))
     o.append('</div></section>')
     # навыки
+    prod_html = ''.join(o); o = _keep
+    o.append('<div class="tabs" role="tablist"><button type="button" role="tab" class="on" data-tab="prod">%s</button><button type="button" role="tab" data-tab="exp">%s</button></div>' % (E(L['b_proj']), E(L['b_exp'])))
+    o.append('<div class="panel" id="p-prod">' + prod_html + '</div><div class="panel" id="p-exp" hidden>' + exp_html + '</div>')
     o.append('<h2 class="sec" id="skills">%s</h2><div class="sk">' % E(L['sk_h']))
     for t, items in L['skills']:
         o.append('<div><b>%s</b>%s</div>' % (E(t), ''.join('<span>%s</span>' % E(i) for i in items)))
@@ -410,7 +419,14 @@ function open(id){var d=ds['d-'+id];if(d&&!d.open){d.showModal();try{history.rep
  d.addEventListener('click',function(e){if(e.target===d||e.target.hasAttribute('data-close'))d.close()});
  d.addEventListener('close',function(){try{history.replaceState(null,'',location.pathname)}catch(e){}});
 });
-function fromHash(){var h=location.hash.replace('#','');if(h&&ds['d-'+h])open(h)}fromHash();window.addEventListener('hashchange',fromHash);
+var tb=document.querySelectorAll('[data-tab]');
+function tab(n){[].forEach.call(tb,function(b){b.classList.toggle('on',b.dataset.tab===n)});document.getElementById('p-prod').hidden=n!=='prod';document.getElementById('p-exp').hidden=n!=='exp'}
+[].forEach.call(tb,function(b){b.addEventListener('click',function(){tab(b.dataset.tab)})});
+function fromHash(){var h=location.hash.replace('#','');if(!h)return;
+ if(ds['d-'+h]){tab('prod');open(h);return}
+ if(h==='experience'){tab('exp')}else if(h==='projects'){tab('prod')}
+ var el=document.getElementById(h);if(el)el.scrollIntoView()}
+fromHash();window.addEventListener('hashchange',fromHash);
 })();
 </script><script defer src="/_vercel/insights/script.js"></script></body></html>""")
     return '\n'.join(o)
