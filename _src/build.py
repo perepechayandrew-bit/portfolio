@@ -6,6 +6,13 @@ import os, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 E = html.escape
 
+# Палитра компаний. Оттенки приблизительные: чтобы поменять, исправь HEX здесь и запусти build.py
+BRAND = [
+ dict(c='#F26A1B', ct='#B8480C', tint='#FFF2E9', line='#F8CDB0'),   # Axenix: оранжевый
+ dict(c='#0B72B9', ct='#0B5E9A', tint='#E9F3FB', line='#B8D9F0'),   # СИБУР: синий
+ dict(c='#2AA5E3', ct='#0B79B0', tint='#EAF7FE', line='#BDE3F7'),   # Технологии Доверия: голубой
+]
+
 IMG = {
  'joyka': [('joyka-home',589,1280),('joyka-timer',589,1280),('joyka-settings',589,1280),('joyka-stats',589,1280)],
  'rg':    [('rg-lobby',645,1170),('rg-market',630,1030)],
@@ -241,15 +248,16 @@ nav a:hover{color:var(--ink)}
 .fact span{display:block;margin-top:5px;font-size:13.5px;color:var(--mute)}
 h2.sec{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600;margin:44px 0 6px}
 p.sub{font-size:14.5px;color:var(--mute);margin-bottom:14px}
-.xp{border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin-top:12px}
+.xp{border:1px solid var(--line);border-left:5px solid var(--c);border-radius:18px;padding:20px 22px;margin-top:12px}
 .xp-h{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
-.xp-h b{font-size:18px}.xp-h span{font-size:13.5px;color:var(--mute)}
+.xp-h b{font-size:18px;display:flex;align-items:center;gap:9px}.xp-h .dot{width:12px;height:12px;border-radius:50%;background:var(--c);display:inline-block}.xp-h span{font-size:13px;color:var(--ct);background:var(--tint);border:1px solid var(--line2);border-radius:999px;padding:2px 11px}
 .xp-p{font-size:14.5px;color:var(--mute);margin-top:2px}
 .xrow{display:grid;grid-template-columns:130px 1fr;gap:4px 20px;padding:10px 0;border-top:1px solid var(--line);margin-top:10px;font-size:14.5px}
 .xrow+.xrow{margin-top:0}
 .xrow dt{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;padding-top:2px}
-.xrow.res{background:var(--okbg);border:1px solid var(--okline);border-radius:12px;padding:12px 14px;margin-top:8px}
-.xrow.res dt{color:var(--ok)}
+.xrow.res{background:var(--tint);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;margin-top:8px}
+.xrow.res dt{color:var(--ct)}
+.xrow.res li::marker{color:var(--c)}
 .xrow ul{padding-left:18px}.xrow li{margin-bottom:3px}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:6px}
 .card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
@@ -311,14 +319,16 @@ def page(L):
     nav = ''.join('<a class="nl" href="%s">%s</a>' % (h, E(t)) for h, t in L['nav'])
     o.append('<header class="top"><div class="wrap"><b>%s</b><nav>%s<div class="lang"><span>%s</span><a href="%s" onclick="%s">%s</a></div></nav></div></header>' % (E(L['name']), nav, L['cur_label'], L['alt_url'], setlang, L['alt_label']))
     o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn dark" href="#experience">%s</a><a class="btn" href="#projects">%s</a><a class="btn" href="https://t.me/andrew_727">%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), E(L['lead']), E(L['b_exp']), E(L['b_proj']), E(L['b_tg'])))
-    for b, t in L['facts']:
-        o.append('<div class="fact"><b>%s</b><span>%s</span></div>' % (E(b), E(t)))
+    for i, (b, t) in enumerate(L['facts']):
+        st = ' style="border-top:3px solid %s"' % BRAND[i]['c'] if i < 2 else ''
+        o.append('<div class="fact"%s><b>%s</b><span>%s</span></div>' % (st, E(b), E(t)))
     o.append('</div></section>')
     # опыт
     o.append('<h2 class="sec" id="experience">%s</h2>' % E(L['exp_h']))
     xl = L['x_lbl']
-    for x in L['exp']:
-        o.append('<article class="xp"><div class="xp-h"><b>%s</b><span>%s</span></div><div class="xp-p">%s</div><dl>' % (E(x['co']), E(x['per']), E(x['pos'])))
+    for i, x in enumerate(L['exp']):
+        B = BRAND[i]
+        o.append('<article class="xp" style="--c:%s;--ct:%s;--tint:%s;--line2:%s"><div class="xp-h"><b><i class="dot"></i>%s</b><span>%s</span></div><div class="xp-p">%s</div><dl>' % (B['c'], B['ct'], B['tint'], B['line'], E(x['co']), E(x['per']), E(x['pos'])))
         o.append('<div class="xrow"><dt>%s</dt><dd>%s</dd></div>' % (E(xl['project']), E(x['project'])))
         o.append('<div class="xrow"><dt>%s</dt><dd>%s</dd></div>' % (E(xl['scale']), E(x['scale'])))
         o.append('<div class="xrow"><dt>%s</dt><dd>%s</dd></div>' % (E(xl['resp']), E(x['resp'])))
