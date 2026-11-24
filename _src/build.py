@@ -408,7 +408,7 @@ def page(L):
     o.append('<header class="top"><div class="wrap"><b>%s</b><nav>%s<div class="lang"><span>%s</span><a href="%s" onclick="%s">%s</a></div></nav></div></header>' % (E(L['name']), nav, L['cur_label'], L['alt_url'], setlang, L['alt_label']))
     o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><div class="cta"><a class="btn tg" href="https://t.me/andrew_727"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3 18.6 19.6c-.2 1.1-.9 1.3-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6.1 13 1.2 11.5c-1.1-.3-1.1-1 .2-1.5L20.5 2.6c.9-.3 1.7.2 1.4 1.7z"/></svg>%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), E(L['b_tg'])))
     for i, (b, t) in enumerate(L['facts']):
-        st = ' style="border-top:3px solid %s"' % BRAND[i]['c'] if i < 2 else ''
+        st = ' style="border-top:3px solid %s"' % (BRAND[i]['c'] if i < 2 else '#6b5bd6')
         o.append('<div class="fact"%s><b>%s</b><span>%s</span></div>' % (st, E(b), E(t)))
     o.append('</div></section>')
     o.append('<h2 class="sec" id="contact" style="margin-top:36px">%s</h2><div class="contacts"><a href="https://t.me/andrew_727"><small>Telegram</small>@andrew_727</a><a href="mailto:perepechayandrew@gmail.com"><small>Email</small>perepechayandrew@gmail.com</a><a href="tel:+79163448547"><small>%s</small>+7 (916) 344-85-47</a></div>' % (E(L['c_h']), E(L['phone'])))
