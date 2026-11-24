@@ -6,331 +6,363 @@ import os, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 E = html.escape
 
-def gallery(kind):
-    if kind == 'joyka':
-        return '''<div class="stage joyka">
-<div class="phone t1"><img src="/img/joyka-home.webp" alt="{a1}" width="589" height="1280"></div>
-<div class="phone t2"><img src="/img/joyka-timer.webp" alt="{a2}" width="589" height="1280"></div>
-<div class="phone t1"><img src="/img/joyka-settings.webp" alt="{a3}" width="589" height="1280"></div>
-<div class="phone t2"><img src="/img/joyka-stats.webp" alt="{a4}" width="589" height="1280"></div></div>'''
-    if kind == 'rg':
-        return '''<div class="stage rg">
-<div class="phone t1"><img src="/img/rg-lobby.webp" alt="{a1}" width="645" height="1170"></div>
-<div class="phone t2"><img src="/img/rg-market.webp" alt="{a2}" width="630" height="1030"></div></div>'''
-    if kind == 'w12':
-        return '''<div class="stage w12">
-<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="/img/w12-dashboard.webp" alt="{a1}" width="1280" height="713"></div>
-<div class="desk-row">
-<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="/img/w12-landing.webp" alt="{a2}" width="1280" height="535"></div>
-<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="/img/w12-wheel.webp" alt="{a3}" width="1280" height="509"></div></div></div>'''
-    return '''<div class="stage oyf">
-<div class="widget"><img src="/img/oyf-timer.webp" alt="{a1}" width="528" height="854"></div>
-<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="/img/oyf-city.webp" alt="{a2}" width="1280" height="844"></div></div>'''
+IMG = {
+ 'joyka': [('joyka-home',589,1280),('joyka-timer',589,1280),('joyka-settings',589,1280),('joyka-stats',589,1280)],
+ 'rg':    [('rg-lobby',645,1170),('rg-market',630,1030)],
+ 'w12':   [('w12-dashboard',1280,713),('w12-landing',1280,535),('w12-wheel',1280,509)],
+ 'oyf':   [('oyf-timer',528,854),('oyf-city',1280,844)],
+}
+def cover(kind, alt):
+    def im(n, cls): return '<img class="%s" src="/img/%s.webp" alt="" loading="lazy">' % (cls, n)
+    if kind == 'joyka': inner = im('joyka-home','cp') + im('joyka-timer','cp')
+    elif kind == 'rg': inner = im('rg-lobby','cp') + im('rg-market','cp')
+    elif kind == 'w12': inner = im('w12-dashboard','cw')
+    else: inner = im('oyf-timer','cx') + im('oyf-city','cw2')
+    return '<div class="cover c-%s" role="img" aria-label="%s">%s</div>' % (kind, E(alt), inner)
 
-# ---------------------------------------------------------------- RU
+def gallery(kind, alts):
+    out = []
+    for (name, w, h), a in zip(IMG[kind], alts):
+        cls = 'g-m' if h > w else 'g-d'
+        out.append('<figure class="%s"><img src="/img/%s.webp" alt="%s" width="%d" height="%d" loading="lazy"></figure>' % (cls, name, E(a), w, h))
+    return '<div class="gal">%s</div>' % ''.join(out)
+
+# =================================================================== RU
 RU = dict(
-  lang='ru', title='Андрей Перепечай — Product Owner, Project Manager',
-  desc='Портфолио: четыре продукта с задачей, ролью, результатом и метриками. Product Owner и Project Manager.',
-  alt_url='/en/', alt_label='EN', cur_label='RU',
-  nav=[('#cases','Кейсы'),('#about','Опыт'),('#contact','Контакты')],
-  h1='Product Owner и Project Manager',
-  lead='Три года в корпоративных ИТ-проектах. Четыре собственных продукта: от исследования до рабочей версии.',
-  cta1='Смотреть кейсы', cta2='Написать в Telegram',
-  facts=[('3 команды','около 10 человек в каждой. Платформа банковских расчётов, Axenix: бюджет, нагрузка команд, эскалации заказчика.'),
-         ('20 000','пользователей корпоративной базы знаний с нейросетевым поиском. СИБУР.'),
-         ('4 продукта','от идеи до рабочей версии. Ниже: задача, роль, результат, метрики.'),
-         ('50+','человек играли в онлайн-игру «Растущий город».')],
-  cases_h='Кейсы', expand='Развернуть все', collapse='Свернуть все',
-  l_problem='Задача', l_role='Роль', l_done='Что сделано', l_result='Результат',
-  l_tools='Инструменты', l_metrics='Метрики', l_lesson='Вывод',
-  m_head=('Метрика','Как считается','Цель'),
-  m_note='Цели — ориентиры, которые я задал бы продукту. Это не измеренные результаты.',
-  m_main='главная метрика',
-  peek_task='Задача', peek_res='Результат',
-  about_h='Опыт', contact_h='Контакты',
-  about=[('Axenix, Project Manager','Платформа банковских расчётов. Три команды по 10 человек. Бюджет, загрузка команд, эскалации заказчика.'),
-         ('Технологии Доверия','Запуск пробной версии продукта на нейросетях для казначейства. Исследование рынка цифровых финансовых активов: регулирование и кейсы.'),
-         ('СИБУР','Корпоративная база знаний с поиском на нейросети. Подключена вся компания, около 20 000 пользователей.'),
-         ('Образование','Юридическое: правовое обеспечение национальной безопасности.')],
-  cases=[
-   dict(kind='joyka', n='01', name='Joyka', one='Мобильное приложение коротких медитаций для людей под стрессом.',
-     tags=['Product Owner','iOS','Разработчик и дизайнер в команде'],
-     peek_task='снизить стресс за 4–5 минут.', peek_res='8 сценариев, 3 голоса, статистика серий. Приложение для iOS.',
-     alts=['Joyka: главный экран со списком медитаций','Joyka: экран медитации «Удержи аппетит»','Joyka: настройки звуков и голоса','Joyka: личная статистика'],
-     problem='Людям под стрессом нужна быстрая практика. Длинные общие курсы не подходят для ситуации «сейчас».',
-     role='Product Owner. Исследование рынка, анализ аудитории, анкетирование. Требования для разработчика и дизайнера. Код и дизайн делали они.',
-     done=['Исследовал рынок и аудиторию, провёл анкетирование.','Выделил 8 ситуаций по 4–5 минут: сон, напряжение, аппетит, решение и другие.','Описал настройки: метроном, звуки природы, музыка 432 Гц, 3 голоса, отдельная громкость каждого слоя.','Добавил возврат пользователя: ежедневное напоминание, серия дней, статистика по каждой медитации.'],
-     tiles=[('8','сценариев'),('3','голоса'),('3','слоя звука'),('4–5 мин','одна сессия')],
-     result_pts=['Готовое приложение для iOS с личной статистикой и серией.'],
-     tools=['Анкетирование','Анализ рынка','Анализ аудитории'],
-     metrics=[('Частота',True,'Завершённые сессии на активного пользователя в неделю','3'),('Активация',False,'Новые пользователи, завершившие первую сессию в день установки','60%'),('Завершаемость',False,'Завершённые сессии / начатые','70%'),('Возврат на 7-й день',False,'Пользователи, вернувшиеся на 7-й день','20%')],
-     lesson='Заложил бы события аналитики в первую версию: без них непонятно, какие сценарии возвращают людей.'),
-   dict(kind='rg', n='02', name='Растущий город', one='Онлайн-игра в браузере: партия за один клик, боты, лобби по ссылке.',
-     tags=['Product Owner','Project Manager','Веб','Полный цикл'],
-     peek_task='играть без ожидания компании.', peek_res='50+ игроков, 3 языка, аналитика партий, проиндексирован в Google и Яндексе.',
-     alts=['Растущий город: лобби','Растущий город: рынок и ход игрока'],
-     problem='Для настольной игры нужна компания. Собрать людей в один момент трудно.',
-     role='Product Owner и Project Manager в одном лице: идея, правила, баланс, приоритеты, релизы, аналитика. Код писал с Claude и Cursor.',
-     done=['«Быстрая игра»: партия стартует сразу, свободные места занимают 6 ботов-персонажей.','Лобби по ссылке с PIN-кодом, 3 режима длины партии.','Баланс карт: две итерации. Туториал, чат с реакциями, исключение игроков.','Интерфейс на русском, английском и испанском.','Исправил блокировку соединения, потерю связи игрока и мобильную вёрстку.'],
-     tiles=[('50+','игроков'),('2','поисковика: сайт подтверждён'),('1','админ-панель с аналитикой партий')],
-     result_pts=['Собственная аналитика партий.','Запуск на своём домене с SSL.','Хостинг не продлён, публичной ссылки сейчас нет.'],
-     tools=['Claude','Cursor','React','Node.js','Socket.io','SQLite','nginx','Git'],
-     metrics=[('Партии на игрока',True,'Завершённые партии на игрока в неделю','3'),('Первая партия',False,'Игроки, дошедшие до конца первой партии','80%'),('Возврат на следующий день',False,'Игроки, вернувшиеся на второй день','25%'),('Время до старта',False,'От нажатия до первого хода','10 сек')],
-     lesson='Запустил бы закрытый тест на 10–15 игроках и опрос после первой партии до расширения контента.'),
-   dict(kind='w12', n='03', name='Week12', one='Сервис планирования целей по методологии «12 недель».',
-     tags=['Product Owner','Project Manager','Веб','Первый продукт'],
-     peek_task='связать цель на год с задачами недели.', peek_res='4 уровня целей, колесо жизни по 8 сферам, ретроспективы. Проект закрыт.',
-     alts=['Week12: дашборд цикла','Week12: главная страница','Week12: колесо жизни'],
-     problem='Большая цель теряется без связи с действиями недели.',
-     role='Product Owner и Project Manager. Перенёс консалтинговую методологию достижения целей в сервис.',
-     done=['Иерархия целей: вектор, цели года, цели сезона, задачи.','Дашборд: прогресс цикла, фокус недели, карта 12 недель.','Колесо жизни по 8 сферам, еженедельные ретроспективы, награда за завершённый сезон.','Онбординг с самооценкой, письма-напоминания, админ-панель.','Требования 152-ФЗ: согласие на cookie, политика обработки данных.'],
-     tiles=[('4','уровня целей'),('12','недель в цикле'),('8','сфер жизни'),('1','полный путь пользователя')],
-     result_pts=['Рабочий путь от регистрации до завершения сезона.','Защита: ограничение попыток входа в админку, права на уровне строк в базе.','Проект закрыт. Был проверкой методологии на практике.'],
-     tools=['Cursor','Next.js','TypeScript','Supabase','Vercel','Tailwind'],
-     metrics=[('Выполнение недели',True,'Выполненные задачи недели / запланированные','70%'),('Активация',False,'Создана первая цель в день регистрации','70%'),('Возврат на 2-й неделе',False,'Пользователи, вернувшиеся на 2-й неделе','40%'),('Завершённые сезоны',False,'Сезоны, дошедшие до недели 12','15%')],
-     lesson='Начал бы с проверки спроса: страница с описанием и 10 интервью до разработки полной иерархии целей.'),
-   dict(kind='oyf', n='04', name='Own Your Future', one='Приложение для Windows: время на цели превращается в этажи города.',
-     tags=['Product Owner','Project Manager','Windows','Игровая механика'],
-     peek_task='показать накопленный прогресс по долгим целям.', peek_res='Рабочая версия: таймер, город, монеты, серия дней.',
-     alts=['Own Your Future: таймер сессии','Own Your Future: город и активная сессия'],
-     problem='Таймеры считают часы, но не показывают накопленный результат по долгой цели.',
-     role='Product Owner и Project Manager. Продуктовый бриф, механика, приоритеты версий, требования к интерфейсу. Разработка с Claude.',
-     done=['Механика: одна сессия добавляет этаж, высота пропорциональна времени.','3 направления: «Работа», «Развитие», «Развлечения», плюс свои.','Монеты за этажи, здания для отдыха на монеты.','Здание не закрывается: цель только маркер, навык можно растить дальше.','Окно-виджет без системной рамки, фиксированного размера.'],
-     tiles=[('3','направления'),('3','раздела: таймер, город, настройки'),('1','экономика монет')],
-     result_pts=['Рабочая версия для Windows: таймер, город, настройки.'],
-     tools=['Claude','GitHub'],
-     metrics=[('Часы в неделю',True,'Часы целевой работы на активного пользователя в неделю','7'),('Дни с сессией',False,'Дни в неделю с хотя бы одной завершённой сессией','5 из 7'),('План',False,'Сессии, завершённые по плану','80%'),('Возврат на 7-й день',False,'Пользователи, вернувшиеся на 7-й день','30%')],
-     lesson='Проверил бы механику монет и зданий на 5–10 людях до экрана города: она задаёт экономику продукта.'),
-  ],
+ lang='ru', name='Андрей Перепечай',
+ title='Андрей Перепечай — Product Owner & Project Manager',
+ desc='Product Owner и Project Manager. Корпоративные ИТ-проекты, четыре собственных продукта: задача, роль, результат.',
+ alt_url='/en/', alt_label='EN', cur_label='RU',
+ nav=[('#experience','Опыт'),('#projects','Проекты'),('#skills','Навыки'),('#contact','Контакты')],
+ role='Product Owner & Project Manager',
+ lead='Управляю корпоративными ИТ-проектами и создаю цифровые продукты: от исследования и требований до запуска и развития.',
+ b_exp='Опыт работы', b_proj='Проекты', b_tg='Telegram',
+ facts=[('≈260 млн руб.','бюджет платформы банковских взаиморасчётов. 3 команды, около 30 человек. Axenix.'),
+        ('≈20 000','пользователей корпоративной базы знаний с нейросетевым поиском. СИБУР.'),
+        ('4 продукта','собственные продукты от идеи до запуска. Один в App Store, одна онлайн-игра с 50+ игроками.')],
+ exp_h='Опыт работы',
+ x_lbl=dict(project='Проект', scale='Масштаб', resp='Ответственность', res='Результаты'),
+ exp=[
+  dict(co='Axenix', pos='Project Manager', per='08.2025 — настоящее время',
+       project='Платформа автоматизации взаиморасчётов крупного банка.',
+       scale='Бюджет около 260 млн руб. Три взаимосвязанные системы, три функциональных модуля, около 300 внутренних пользователей. 3 команды разработки, около 30 человек, 3 тимлида.',
+       resp='Бюджет, ресурсы и загрузка команд, зависимости между системами, эскалации заказчика.',
+       res=['Три модуля импортозамещения запущены и масштабируются.','Отклонений от плана по бюджету нет.','Подготовил новый проект на 77 млн руб.: оценки команд, бюджет, финансовая модель, сроки с заказчиком.','5 квартальных поставок подряд в срок и в согласованном объёме.']),
+  dict(co='СИБУР', pos='Проектный офис (PMO)', per='06.2024 — 11.2024',
+       project='Корпоративная база знаний с поиском на основе больших языковых моделей и RAG, внутри контура компании.',
+       scale='Около 20 000 пользователей, подключена вся компания. Бюджет около 350 млн руб.',
+       resp='Бюджет и сроки, контрольные точки, бэклог из 100+ гипотез (Jira, приоритизация RICE), планирование спринтов, груминг, обзоры спринтов, подрядчики, обучение пользователей.',
+       res=['Контрольные точки пройдены с отклонением по бюджету менее 15%.','Процесс подготовки к контрольным точкам в Confluence: экономия около 7 человеко-дней на каждой квартальной точке.','Рост ежедневных активных пользователей (DAU) на 15% за счёт обучения и коммуникаций.']),
+  dict(co='Технологии Доверия', pos='Бизнес-аналитик, руководитель проекта AI Co-Pilot', per='11.2024 — 08.2025',
+       project='Сервис прогнозирования движения денежных средств для казначейства на машинном обучении.',
+       scale='Кросс-функциональная команда: backend, frontend, DevOps, аналитика, машинное обучение.',
+       resp='План, бэклог и дорожная карта, требования, демонстрации, исследования рынка.',
+       res=['Вместе с командой машинного обучения повысил точность прогноза с 70% до 85% на исторических данных.','Подготовил блок демонстраций для пилота в нефтехимической компании.','Исследование для облачного хранилища банка: 10 фокус-групп, 70+ гипотез, 10 инициатив. Клиент заказал повторный проект.']),
+ ],
+ proj_h='Собственные продукты', proj_sub='Четыре продукта, которые я придумал, описал и вывел в рабочую версию.',
+ p_lbl=dict(role='Роль',stage='Стадия',res='Результат',more='Подробнее'),
+ d_lbl=dict(about='О продукте',problem='Проблема пользователя',role='Моя роль',done='Что сделано',result='Результат',metrics='Метрики и аналитика',fact='Фактически',main='Главная метрика',aux='Вспомогательные',events='События для сбора',close='Закрыть'),
+ projects=[
+  dict(id='joyka', name='Joyka', desc='Мобильное приложение коротких медитаций для людей под стрессом.',
+   role='Product Owner. Команда: разработчик и дизайнер.', stage='Готовое приложение в App Store', res_short='≈200 установок, рейтинг 5,0',
+   alts=['Joyka: главный экран','Joyka: экран медитации','Joyka: настройки звука и голоса','Joyka: личная статистика'],
+   about='8 сценариев по 4–5 минут: сон, напряжение, аппетит, решение и другие. Метроном, звуки природы, музыка 432 Гц, 3 голоса.',
+   problem='Человеку под стрессом нужна короткая практика под конкретную ситуацию. Длинные общие курсы для этого не подходят.',
+   role_d='Product Owner. Исследование рынка и аудитории, анкетирование, требования. Разработчик и дизайнер реализовали продукт.',
+   done=['Исследовал рынок и аудиторию, провёл анкетирование.','Выделил пользовательские ситуации и описал 8 сценариев.','Описал требования к настройкам звука, голосов и громкости каждого слоя.','Добавил механики возврата: ежедневное напоминание, серия дней, статистика.'],
+   result=['Готовое приложение для iOS, выпущено в App Store.','≈200 установок, рейтинг 5,0.'],
+   fact=['≈200 установок, рейтинг 5,0 в App Store.'],
+   main='Завершённые сессии на активного пользователя в неделю (Sessions per Active User).',
+   aux=['Доля активации (Activation Rate): первая сессия в день установки.','Удержание на 7-й день (D7 Retention).'],
+   events=['Установка','Начало и завершение сессии','Смена голоса','Включение напоминания']),
+  dict(id='rg', name='Растущий город', desc='Онлайн-экономическая настольная игра: быстрая партия с ботами и лобби по ссылке.',
+   role='Product Owner и Project Manager. Реализация с Claude и Cursor.', stage='Запущена. Хостинг не продлён', res_short='50+ игроков',
+   alts=['Растущий город: лобби','Растущий город: рынок и ход игрока'],
+   about='Игроки покупают карты построек и получают доход по броску кубика. Партия стартует за один клик, свободные места занимают 6 ботов-персонажей.',
+   problem='Для настольной игры нужна компания. Собрать людей в один момент трудно.',
+   role_d='Product Owner и Project Manager: правила, игровая экономика, бэклог и приоритеты, релизы, аналитика. Claude и Cursor использовал как инструменты реализации.',
+   done=['Проработал правила и баланс игровой экономики: две итерации баланса карт.','Вёл бэклог и приоритеты, выпустил рабочую версию за 3 недели.','Быстрая игра с ботами, многопользовательский режим, лобби по ссылке с PIN-кодом.','Три языка интерфейса, мобильная адаптация.','Настроил аналитику партий: воронка, DAU, удержание D1 и D7, длительность сессий.'],
+   result=['50+ игроков.','Первые 3 недели: 21 игрок, 42 партии, средняя сессия 18 минут.','Сайт подтверждён в Google Search Console и Яндекс.Вебмастере.','Хостинг не продлён, публичной ссылки сейчас нет.'],
+   fact=['50+ игроков, из них за первые 3 недели: 21 игрок, 42 партии, средняя сессия 18 минут.'],
+   main='Завершённые партии на игрока (Completed Games).',
+   aux=['Зарегистрированные пользователи.','Удержание на 7-й день (D7 Retention).','Ежедневные активные пользователи (DAU).'],
+   events=['Регистрация','Вход в лобби','Старт партии','Завершение партии','Выход до конца партии']),
+  dict(id='w12', name='Week12', desc='Сервис планирования целей по методологии «12 недель в году».',
+   role='Product Owner и Project Manager.', stage='Проект закрыт', res_short='Рабочий путь от регистрации до завершения сезона',
+   alts=['Week12: дашборд цикла','Week12: главная страница','Week12: колесо жизни'],
+   about='Иерархия целей: вектор, цели года, цели сезона, задачи. Дашборд цикла, колесо жизни по 8 сферам, еженедельные ретроспективы.',
+   problem='Большая цель теряется, если она не связана с действиями недели.',
+   role_d='Product Owner и Project Manager. Перенёс консалтинговую методологию достижения целей в цифровой продукт.',
+   done=['Проработал пользовательский путь и иерархию целей.','Дашборд цикла, система планирования и ретроспектив.','Онбординг с самооценкой, письма-напоминания, админ-панель.','Требования 152-ФЗ: согласие на cookie, политика обработки данных.'],
+   result=['Рабочий сценарий от регистрации до завершения сезона.','Проект закрыт. Подтверждённых показателей активной аудитории нет.'],
+   fact=['Подтверждённых данных об активной аудитории нет.'],
+   main='Доля выполненных задач недели (Task Completion Rate).',
+   aux=['Доля активации (Activation Rate): первая цель в день регистрации.','Удержание на 4-й неделе (W4 Retention).','Еженедельные активные пользователи (WAU), при наличии аудитории.'],
+   events=['Создание цели','Отметка задачи','Заполнение ретроспективы','Завершение сезона']),
+  dict(id='oyf', name='Own Your Future', desc='Приложение для Windows: время на долгие цели превращается в этажи города.',
+   role='Product Owner и Project Manager. Реализация с Claude.', stage='Рабочая версия', res_short='Рабочая версия с игровой экономикой монет',
+   alts=['Own Your Future: таймер сессии','Own Your Future: город и активная сессия'],
+   about='Фокус-сессия добавляет этаж, высота пропорциональна времени. Три направления: работа, развитие, развлечения. На монеты строятся здания для отдыха.',
+   problem='Таймеры считают часы, но не показывают накопленный результат по долгой цели.',
+   role_d='Product Owner и Project Manager. Продуктовый бриф, механики, приоритеты версий, требования к интерфейсу.',
+   done=['Сформулировал продуктовую концепцию и механику фокус-сессий.','Проработал игровую экономику: монеты за этажи, здания для отдыха.','Описал виртуальный город: здание не закрывается, цель остаётся маркером.','Расставил приоритеты функций, довёл до рабочей версии.'],
+   result=['Рабочая версия для Windows: таймер, город, настройки.','Используется для личных целей. Пользовательских данных нет.'],
+   fact=['Пользовательских данных нет: приложение для личного использования.'],
+   main='Завершённые фокус-сессии на активного пользователя в неделю (Completed Focus Sessions).',
+   aux=['Активированные пользователи: завершена первая сессия.','Еженедельные активные пользователи (WAU).','Удержание на 7-й день (D7 Retention).'],
+   events=['Старт и завершение сессии','Построенный этаж','Трата монет','Открытие экрана города']),
+ ],
+ sk_h='Навыки',
+ skills=[('Управление проектами',['Бюджет и финансовая модель','Сроки и ресурсы','Риски и зависимости','Работа с заказчиком','Scrum: планирование, груминг, обзоры спринтов']),
+         ('Продуктовая работа',['Исследование пользователей и рынка','Гипотезы и приоритизация (RICE)','Бэклог и требования','Минимально жизнеспособный продукт (MVP)','Продуктовая аналитика']),
+         ('Нейросети и инструменты',['Поиск на больших языковых моделях (RAG)','Прогнозирование на машинном обучении','Claude, Cursor','Jira, Confluence'])],
+ c_h='Контакты',
 )
 
-# ---------------------------------------------------------------- EN
+# =================================================================== EN
 EN = dict(
-  lang='en', title='Andrey Perepechay — Product Owner, Project Manager',
-  desc='Portfolio: four products with problem, role, result and metrics. Product Owner and Project Manager.',
-  alt_url='/', alt_label='RU', cur_label='EN',
-  nav=[('#cases','Case studies'),('#about','Experience'),('#contact','Contact')],
-  h1='Product Owner and Project Manager',
-  lead='Three years in enterprise IT projects. Four products of my own, from research to a working release.',
-  cta1='View case studies', cta2='Message on Telegram',
-  facts=[('3 teams','about 10 people each. Bank settlements platform, Axenix: budget, team load, customer escalations.'),
-         ('20,000','users of a corporate knowledge base with AI search. SIBUR.'),
-         ('4 products','from idea to a working release. Below: problem, role, result, metrics.'),
-         ('50+','people played the online game “Growing City”.')],
-  cases_h='Case studies', expand='Expand all', collapse='Collapse all',
-  l_problem='Problem', l_role='Role', l_done='What I did', l_result='Result',
-  l_tools='Tools', l_metrics='Metrics', l_lesson='Takeaway',
-  m_head=('Metric','Definition','Target'),
-  m_note='Targets are benchmarks I would set for the product. They are not measured results.',
-  m_main='primary metric',
-  peek_task='Problem', peek_res='Result',
-  about_h='Experience', contact_h='Contact',
-  about=[('Axenix, Project Manager','Bank settlements platform. Three teams of 10 people. Budget, team load, customer escalations.'),
-         ('Technologies of Trust','Launched a pilot AI product for corporate treasury. Researched the digital financial assets market: regulation and cases.'),
-         ('SIBUR','Corporate knowledge base with AI search. Whole company connected, about 20,000 users.'),
-         ('Education','Law degree: legal support of national security.')],
-  cases=[
-   dict(kind='joyka', n='01', name='Joyka', one='Mobile app with short guided meditations for people under stress.',
-     tags=['Product Owner','iOS','Developer and designer on the team'],
-     peek_task='reduce stress in 4–5 minutes.', peek_res='8 scenarios, 3 voices, streak statistics. iOS app.',
-     alts=['Joyka: home screen with meditations','Joyka: meditation screen','Joyka: sound and voice settings','Joyka: personal statistics'],
-     problem='People under stress need a fast practice. Long generic courses do not fit the “right now” situation.',
-     role='Product Owner. Market research, audience analysis, questionnaire survey. Requirements for the developer and the designer. They wrote the code and drew the design.',
-     done=['Researched the market and the audience, ran a questionnaire survey.','Defined 8 situations of 4–5 minutes: sleep, tension, appetite, decisions and others.','Specified the sound setup: metronome, nature sounds, 432 Hz music, 3 voices, separate volume per layer.','Added retention: daily reminder, day streak, statistics per meditation.'],
-     tiles=[('8','scenarios'),('3','voices'),('3','sound layers'),('4–5 min','per session')],
-     result_pts=['Finished iOS app with personal statistics and streaks.'],
-     tools=['Questionnaire survey','Market research','Audience analysis'],
-     metrics=[('Frequency',True,'Completed sessions per active user per week','3'),('Activation',False,'New users who finish a first session on install day','60%'),('Completion rate',False,'Completed sessions / started sessions','70%'),('Day-7 retention',False,'Users who return on day 7','20%')],
-     lesson='I would build analytics events into the first release. Without them it is unclear which scenarios bring people back.'),
-   dict(kind='rg', n='02', name='Growing City', one='Browser game: one-click match, bots, lobby by link.',
-     tags=['Product Owner','Project Manager','Web','Full cycle'],
-     peek_task='play without waiting for friends.', peek_res='50+ players, 3 languages, match analytics, indexed by Google and Yandex.',
-     alts=['Growing City: lobby','Growing City: market and player turn'],
-     problem='A board game needs company. Gathering people at one moment is hard.',
-     role='Product Owner and Project Manager in one person: idea, rules, balance, priorities, releases, analytics. Code written with Claude and Cursor.',
-     done=['“Quick game”: a match starts at once, free seats are filled by 6 bot characters.','Lobby by link with a PIN code, 3 match-length modes.','Card balance: two iterations. Tutorial, chat with reactions, player kick.','Interface in Russian, English and Spanish.','Fixed connection blocking, player disconnects and the mobile layout.'],
-     tiles=[('50+','players'),('2','search engines: site verified'),('1','admin panel with match analytics')],
-     result_pts=['Own match analytics.','Launched on its own domain with SSL.','Hosting is not renewed, there is no public link now.'],
-     tools=['Claude','Cursor','React','Node.js','Socket.io','SQLite','nginx','Git'],
-     metrics=[('Matches per player',True,'Completed matches per player per week','3'),('First match',False,'Players who reach the end of a first match','80%'),('Next-day return',False,'Players who return on day 2','25%'),('Time to start',False,'From click to first turn','10 sec')],
-     lesson='I would run a closed test with 10–15 players and a survey after the first match before adding content.'),
-   dict(kind='w12', n='03', name='Week12', one='Goal planning service based on the “12 Week Year” method.',
-     tags=['Product Owner','Project Manager','Web','First product'],
-     peek_task='connect a yearly goal with weekly tasks.', peek_res='4 goal levels, life wheel with 8 areas, retrospectives. Project closed.',
-     alts=['Week12: cycle dashboard','Week12: landing page','Week12: life wheel'],
-     problem='A big goal gets lost without a link to the actions of the week.',
-     role='Product Owner and Project Manager. Moved a consulting goal-achievement method into a service.',
-     done=['Goal hierarchy: vector, yearly goals, season goals, tasks.','Dashboard: cycle progress, weekly focus, 12-week map.','Life wheel with 8 areas, weekly retrospectives, reward for a finished season.','Onboarding with self-assessment, email reminders, admin panel.','Russian personal data law (152-FZ): cookie consent, data processing policy.'],
-     tiles=[('4','goal levels'),('12','weeks per cycle'),('8','life areas'),('1','full user path')],
-     result_pts=['Working path from sign-up to a finished season.','Protection: login attempt limit for the admin panel, row-level access in the database.','Project closed. It tested the method in practice.'],
-     tools=['Cursor','Next.js','TypeScript','Supabase','Vercel','Tailwind'],
-     metrics=[('Week completion',True,'Completed weekly tasks / planned tasks','70%'),('Activation',False,'First goal created on sign-up day','70%'),('Week-2 return',False,'Users who return in week 2','40%'),('Finished seasons',False,'Seasons that reach week 12','15%')],
-     lesson='I would start by testing demand: a description page and 10 interviews before building the full goal hierarchy.'),
-   dict(kind='oyf', n='04', name='Own Your Future', one='Windows app: time spent on goals turns into floors of a city.',
-     tags=['Product Owner','Project Manager','Windows','Game mechanics'],
-     peek_task='show accumulated progress on long goals.', peek_res='Working version: timer, city, coins, day streak.',
-     alts=['Own Your Future: session timer','Own Your Future: city and active session'],
-     problem='Timers count hours but do not show the accumulated result of a long goal.',
-     role='Product Owner and Project Manager. Product brief, mechanics, release priorities, interface requirements. Built with Claude.',
-     done=['Mechanics: one session adds a floor, floor height is proportional to time.','3 directions: Work, Development, Entertainment, plus custom ones.','Coins for floors, leisure buildings bought with coins.','A building never closes: the goal is only a marker, a skill can keep growing.','Frameless widget window of fixed size.'],
-     tiles=[('3','directions'),('3','sections: timer, city, settings'),('1','coin economy')],
-     result_pts=['Working Windows version: timer, city, settings.'],
-     tools=['Claude','GitHub'],
-     metrics=[('Hours per week',True,'Hours of goal work per active user per week','7'),('Session days',False,'Days per week with at least one completed session','5 of 7'),('Plan',False,'Sessions finished as planned','80%'),('Day-7 retention',False,'Users who return on day 7','30%')],
-     lesson='I would test the coin and building mechanics with 5–10 people before building the city screen: it sets the product economy.'),
-  ],
+ lang='en', name='Andrey Perepechay',
+ title='Andrey Perepechay — Product Owner & Project Manager',
+ desc='Product Owner and Project Manager. Enterprise IT projects and four products of my own: problem, role, result.',
+ alt_url='/', alt_label='RU', cur_label='EN',
+ nav=[('#experience','Experience'),('#projects','Projects'),('#skills','Skills'),('#contact','Contact')],
+ role='Product Owner & Project Manager',
+ lead='I run enterprise IT projects and build digital products: from research and requirements to launch and growth.',
+ b_exp='Experience', b_proj='Projects', b_tg='Telegram',
+ facts=[('≈260 M RUB','budget of a bank settlements platform. 3 teams, about 30 people. Axenix.'),
+        ('≈20,000','users of a corporate knowledge base with AI search. SIBUR.'),
+        ('4 products','my own products from idea to launch. One in the App Store, one online game with 50+ players.')],
+ exp_h='Experience',
+ x_lbl=dict(project='Project', scale='Scale', resp='Responsibility', res='Results'),
+ exp=[
+  dict(co='Axenix', pos='Project Manager', per='08.2025 — present',
+       project='Settlements automation platform for a large bank.',
+       scale='Budget about 260 M RUB. Three connected systems, three functional modules, about 300 internal users. 3 development teams, about 30 people, 3 team leads.',
+       resp='Budget, resources and team load, dependencies between systems, customer escalations.',
+       res=['Three import-substitution modules launched and scaling.','No budget deviations from plan.','Prepared a new 77 M RUB project: team estimates, budget, financial model, timeline agreed with the customer.','5 quarterly deliveries in a row on time and in the agreed scope.']),
+  dict(co='SIBUR', pos='Project Management Office (PMO)', per='06.2024 — 11.2024',
+       project='Corporate knowledge base with search on large language models and RAG, inside the company perimeter.',
+       scale='About 20,000 users, the whole company connected. Budget about 350 M RUB.',
+       resp='Budget and timeline, checkpoints, a backlog of 100+ hypotheses (Jira, RICE prioritization), sprint planning, grooming, sprint reviews, contractors, user training.',
+       res=['Checkpoints passed with budget deviation under 15%.','Checkpoint preparation process in Confluence: about 7 person-days saved at each quarterly checkpoint.','Daily active users (DAU) up 15% through training and communication.']),
+  dict(co='Technologies of Trust', pos='Business Analyst, Project Lead of AI Co-Pilot', per='11.2024 — 08.2025',
+       project='Machine-learning cash flow forecasting service for corporate treasury.',
+       scale='Cross-functional team: backend, frontend, DevOps, analytics, machine learning.',
+       resp='Plan, backlog and roadmap, requirements, demos, market research.',
+       res=['With the machine learning team raised forecast accuracy from 70% to 85% on historical data.','Prepared the demo block for a pilot at a petrochemical company.','Research for a bank cloud storage: 10 focus groups, 70+ hypotheses, 10 initiatives. The client ordered a follow-up project.']),
+ ],
+ proj_h='Products of my own', proj_sub='Four products I defined, specified and brought to a working version.',
+ p_lbl=dict(role='Role',stage='Stage',res='Result',more='Details'),
+ d_lbl=dict(about='About the product',problem='User problem',role='My role',done='What I did',result='Result',metrics='Metrics and analytics',fact='Actual',main='Primary metric',aux='Supporting metrics',events='Events to collect',close='Close'),
+ projects=[
+  dict(id='joyka', name='Joyka', desc='Mobile app with short meditations for people under stress.',
+   role='Product Owner. Team: developer and designer.', stage='Finished app in the App Store', res_short='≈200 installs, 5.0 rating',
+   alts=['Joyka: home screen','Joyka: meditation screen','Joyka: sound and voice settings','Joyka: personal statistics'],
+   about='8 scenarios of 4–5 minutes: sleep, tension, appetite, decisions and others. Metronome, nature sounds, 432 Hz music, 3 voices.',
+   problem='A person under stress needs a short practice for a specific situation. Long generic courses do not fit.',
+   role_d='Product Owner. Market and audience research, questionnaire survey, requirements. The developer and the designer built the product.',
+   done=['Researched the market and the audience, ran a questionnaire survey.','Identified user situations and specified 8 scenarios.','Specified sound, voice and per-layer volume settings.','Added retention mechanics: daily reminder, day streak, statistics.'],
+   result=['Finished iOS app, released in the App Store.','≈200 installs, 5.0 rating.'],
+   fact=['≈200 installs, 5.0 rating in the App Store.'],
+   main='Completed sessions per active user per week (Sessions per Active User).',
+   aux=['Activation Rate: first session on install day.','Day-7 Retention (D7 Retention).'],
+   events=['Install','Session start and finish','Voice change','Reminder enabled']),
+  dict(id='rg', name='Growing City', desc='Online economic board game: quick match with bots and a lobby by link.',
+   role='Product Owner and Project Manager. Built with Claude and Cursor.', stage='Launched. Hosting not renewed', res_short='50+ players',
+   alts=['Growing City: lobby','Growing City: market and player turn'],
+   about='Players buy building cards and earn income on dice rolls. A match starts in one click, free seats are filled by 6 bot characters.',
+   problem='A board game needs company. Gathering people at one moment is hard.',
+   role_d='Product Owner and Project Manager: rules, game economy, backlog and priorities, releases, analytics. Claude and Cursor were implementation tools.',
+   done=['Designed the rules and the game economy balance: two iterations of card balance.','Ran the backlog and priorities, shipped a working version in 3 weeks.','Quick game with bots, multiplayer mode, lobby by link with a PIN code.','Three interface languages, mobile adaptation.','Set up match analytics: funnel, DAU, D1 and D7 retention, session length.'],
+   result=['50+ players.','First 3 weeks: 21 players, 42 matches, average session 18 minutes.','Site verified in Google Search Console and Yandex Webmaster.','Hosting is not renewed, there is no public link now.'],
+   fact=['50+ players; in the first 3 weeks: 21 players, 42 matches, average session 18 minutes.'],
+   main='Completed matches per player (Completed Games).',
+   aux=['Registered users.','Day-7 Retention (D7 Retention).','Daily Active Users (DAU).'],
+   events=['Sign-up','Lobby join','Match start','Match finish','Exit before the end']),
+  dict(id='w12', name='Week12', desc='Goal planning service based on the “12 Week Year” method.',
+   role='Product Owner and Project Manager.', stage='Project closed', res_short='Working path from sign-up to a finished season',
+   alts=['Week12: cycle dashboard','Week12: landing page','Week12: life wheel'],
+   about='Goal hierarchy: vector, yearly goals, season goals, tasks. Cycle dashboard, life wheel with 8 areas, weekly retrospectives.',
+   problem='A big goal gets lost when it is not linked to the actions of the week.',
+   role_d='Product Owner and Project Manager. Turned a consulting goal-achievement method into a digital product.',
+   done=['Designed the user path and the goal hierarchy.','Cycle dashboard, planning and retrospective system.','Onboarding with self-assessment, email reminders, admin panel.','Russian personal data law (152-FZ): cookie consent, data processing policy.'],
+   result=['Working scenario from sign-up to a finished season.','Project closed. There are no confirmed active audience figures.'],
+   fact=['No confirmed data on an active audience.'],
+   main='Share of completed weekly tasks (Task Completion Rate).',
+   aux=['Activation Rate: first goal on sign-up day.','Week-4 Retention (W4 Retention).','Weekly Active Users (WAU), once there is an audience.'],
+   events=['Goal created','Task checked','Retrospective filled','Season finished']),
+  dict(id='oyf', name='Own Your Future', desc='Windows app: time spent on long goals turns into floors of a city.',
+   role='Product Owner and Project Manager. Built with Claude.', stage='Working version', res_short='Working version with a coin economy',
+   alts=['Own Your Future: session timer','Own Your Future: city and active session'],
+   about='A focus session adds a floor, height is proportional to time. Three directions: work, development, entertainment. Coins buy leisure buildings.',
+   problem='Timers count hours but do not show the accumulated result of a long goal.',
+   role_d='Product Owner and Project Manager. Product brief, mechanics, release priorities, interface requirements.',
+   done=['Defined the product concept and the focus session mechanics.','Designed the game economy: coins for floors, leisure buildings.','Described the virtual city: a building never closes, the goal stays a marker.','Prioritized features and brought the product to a working version.'],
+   result=['Working Windows version: timer, city, settings.','Used for personal goals. No user data.'],
+   fact=['No user data: the app is for personal use.'],
+   main='Completed focus sessions per active user per week (Completed Focus Sessions).',
+   aux=['Activated users: first session completed.','Weekly Active Users (WAU).','Day-7 Retention (D7 Retention).'],
+   events=['Session start and finish','Floor built','Coins spent','City screen opened']),
+ ],
+ sk_h='Skills',
+ skills=[('Project management',['Budget and financial model','Timeline and resources','Risks and dependencies','Customer communication','Scrum: planning, grooming, sprint reviews']),
+         ('Product work',['User and market research','Hypotheses and prioritization (RICE)','Backlog and requirements','Minimum viable product (MVP)','Product analytics']),
+         ('AI and tools',['Search on large language models (RAG)','Forecasting with machine learning','Claude, Cursor','Jira, Confluence'])],
+ c_h='Contact',
 )
 
 CSS = r'''
-:root{--bg:#fff;--ink:#14161a;--mute:#5f6670;--line:#e4e7ec;--soft:#f6f7f9;--ok:#0f7b4f;--okbg:#e8f6ee;--okline:#bfe5cf}
+:root{--bg:#fff;--ink:#14161a;--mute:#5f6670;--line:#e4e7ec;--soft:#f6f7f9;--ok:#0f7b4f;--okbg:#e9f6ef;--okline:#bfe5cf}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-header.top{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
-header.top .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
+header.top{position:sticky;top:0;background:rgba(255,255,255,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;height:54px}
 header.top b{font-weight:600}
-nav{display:flex;align-items:center;gap:20px}
+nav{display:flex;align-items:center;gap:18px}
 nav a{text-decoration:none;color:var(--mute);font-size:14px}
 nav a:hover{color:var(--ink)}
 .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-size:13px}
 .lang span,.lang a{padding:4px 11px;display:block}
 .lang span{background:var(--ink);color:#fff}
 .lang a{color:var(--mute)}
-.hero{padding:64px 0 24px}
-.hero h1{font-size:clamp(32px,5.4vw,54px);line-height:1.08;letter-spacing:-.03em;font-weight:700;max-width:820px}
-.hero p.lead{margin-top:16px;font-size:clamp(17px,2vw,20px);color:var(--mute);max-width:680px}
-.cta{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-block;padding:11px 20px;border-radius:999px;font-size:15px;font-weight:500;text-decoration:none;border:1px solid var(--ink)}
+.hero{padding:44px 0 8px}
+.hero .role{font-size:14px;color:var(--ok);font-weight:600;letter-spacing:.02em}
+.hero h1{font-size:clamp(28px,4.2vw,40px);line-height:1.12;letter-spacing:-.02em;font-weight:700;margin-top:6px}
+.hero p.lead{margin-top:12px;font-size:17px;color:var(--mute);max-width:660px}
+.cta{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;padding:9px 18px;border-radius:999px;font-size:14.5px;font-weight:500;text-decoration:none;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;font-family:inherit}
 .btn.dark{background:var(--ink);color:#fff}
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:36px 0 0}
-.fact{border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:var(--soft)}
-.fact b{display:block;font-size:30px;letter-spacing:-.02em;line-height:1.1}
-.fact span{display:block;margin-top:6px;font-size:14px;color:var(--mute)}
-.sechead{display:flex;justify-content:space-between;align-items:center;margin:56px 0 16px}
-h2.sec{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600}
-.toggleall{font:inherit;font-size:13px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 14px;cursor:pointer;color:var(--ink)}
-.case{border:1px solid var(--line);border-radius:24px;margin-bottom:20px;background:#fff;overflow:hidden}
-.case summary{list-style:none;cursor:pointer;padding:24px 28px;position:relative}
-.case summary::-webkit-details-marker{display:none}
-.case .num{font-size:13px;color:var(--mute)}
-.case h3{font-size:clamp(24px,3.4vw,32px);letter-spacing:-.02em;margin:2px 0 4px;padding-right:40px}
-.case .one{color:var(--mute);font-size:16px;max-width:720px}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.tag{font-size:13px;padding:4px 11px;border-radius:999px;background:var(--soft);border:1px solid var(--line)}
-.tag.role{background:var(--ink);color:#fff;border-color:var(--ink)}
-.peek{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
-.peek div{font-size:14.5px;padding:12px 14px;border-radius:12px;background:var(--soft);border:1px solid var(--line)}
-.peek div.r{background:var(--okbg);border-color:var(--okline)}
-.peek small{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
-.peek .r small{color:var(--ok)}
-.case[open] .peek{display:none}
-.chev{position:absolute;right:26px;top:28px;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center}
-.chev:after{content:"";width:7px;height:7px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg) translate(-1px,-1px);transition:transform .2s}
-.case[open] .chev:after{transform:rotate(225deg) translate(-1px,-1px)}
-.more{padding:0 28px 28px}
-.stage{border-radius:20px;padding:30px 18px;display:flex;gap:18px;justify-content:center;align-items:flex-start;overflow-x:auto;margin-bottom:8px}
-.stage.joyka{background:linear-gradient(135deg,#d9f5d4,#c9e9f2)}
-.stage.rg{background:linear-gradient(135deg,#efe3c8,#e3c9a8)}
-.stage.w12{background:linear-gradient(135deg,#eceef2,#dfe3ea);flex-direction:column;align-items:center}
-.stage.oyf{background:linear-gradient(135deg,#2a2440,#4a2f3d);align-items:center}
-.phone{flex:0 0 auto;width:190px;border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(20,22,26,.22),0 0 0 6px #14161a}
-.phone img,.widget img,.desk img{display:block;width:100%;height:auto}
-.phone.t1{margin-top:20px}
-.widget{flex:0 0 auto;width:240px;filter:drop-shadow(0 18px 34px rgba(0,0,0,.45))}
-.desk{width:100%;max-width:760px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(20,22,26,.18)}
-.stage.oyf .desk{flex:1 1 auto;max-width:540px;min-width:300px}
-.desk .bar{height:26px;background:#f1f2f4;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 12px}
-.desk .bar i{width:9px;height:9px;border-radius:50%;background:#c9ccd2;display:block}
-.desk-row{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;width:100%}
-.desk-row .desk{max-width:370px;flex:1 1 300px}
-dl.rows{margin-top:10px}
-.row{display:grid;grid-template-columns:150px 1fr;gap:12px 28px;padding:20px 0;border-top:1px solid var(--line)}
-.row dt{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;padding-top:3px}
-.row dd{font-size:15.5px}
-.row ol{padding-left:20px}
-.row li{margin-bottom:6px}
-.row.res{background:var(--okbg);border:1px solid var(--okline);border-radius:16px;padding:20px;margin:6px 0;border-top:1px solid var(--okline)}
-.row.res dt{color:var(--ok)}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:12px}
-.tile{background:#fff;border:1px solid var(--okline);border-radius:12px;padding:10px 12px}
-.tile b{display:block;font-size:26px;line-height:1.1;color:var(--ok);letter-spacing:-.02em}
-.tile span{font-size:13px;color:var(--mute)}
-.res ul{padding-left:18px}
-.res li{margin-bottom:4px}
-.tools{display:flex;flex-wrap:wrap;gap:7px}
-.tools span{font-size:13px;padding:4px 11px;border-radius:8px;background:#fff;border:1px solid var(--line)}
-table{width:100%;border-collapse:collapse;font-size:14.5px}
-th{text-align:left;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600;padding:0 10px 8px 0;border-bottom:1px solid var(--line)}
-td{padding:9px 10px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
-td.t{white-space:nowrap;font-weight:600}
-.star{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;background:var(--ink);color:#fff;margin-left:6px;font-weight:500;vertical-align:1px}
-.note{font-size:13px;color:var(--mute);margin-top:8px}
-.exp{border-top:1px solid var(--line)}
-.exp div{display:grid;grid-template-columns:200px 1fr;gap:8px 28px;padding:16px 0;border-bottom:1px solid var(--line)}
-.exp b{font-weight:600}
-.exp span{color:#2b2f36}
-.contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.contacts a{display:block;padding:16px 18px;border:1px solid var(--line);border-radius:14px;text-decoration:none;font-weight:500;background:var(--soft)}
-footer{margin:56px 0 40px;color:var(--mute);font-size:13px}
-@media(max-width:760px){.case summary{padding:20px}.more{padding:0 20px 22px}.peek{grid-template-columns:1fr}.row{grid-template-columns:1fr;gap:6px;padding:16px 0}.exp div{grid-template-columns:1fr;gap:2px}.phone{width:140px}.stage{padding:24px 14px;gap:14px;justify-content:flex-start}.stage.w12{align-items:stretch}.stage.rg{justify-content:center}.widget{width:190px}nav a.nl{display:none}.chev{right:18px;top:22px}}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:26px}
+.fact{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--soft)}
+.fact b{display:block;font-size:24px;letter-spacing:-.02em;line-height:1.1}
+.fact span{display:block;margin-top:5px;font-size:13.5px;color:var(--mute)}
+h2.sec{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600;margin:44px 0 6px}
+p.sub{font-size:14.5px;color:var(--mute);margin-bottom:14px}
+.xp{border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin-top:12px}
+.xp-h{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.xp-h b{font-size:18px}.xp-h span{font-size:13.5px;color:var(--mute)}
+.xp-p{font-size:14.5px;color:var(--mute);margin-top:2px}
+.xrow{display:grid;grid-template-columns:130px 1fr;gap:4px 20px;padding:10px 0;border-top:1px solid var(--line);margin-top:10px;font-size:14.5px}
+.xrow+.xrow{margin-top:0}
+.xrow dt{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;padding-top:2px}
+.xrow.res{background:var(--okbg);border:1px solid var(--okline);border-radius:12px;padding:12px 14px;margin-top:8px}
+.xrow.res dt{color:var(--ok)}
+.xrow ul{padding-left:18px}.xrow li{margin-bottom:3px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:6px}
+.card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.cover{height:170px;overflow:hidden;display:flex;justify-content:center;align-items:flex-start;gap:14px;padding-top:18px}
+.c-joyka{background:#e3f4e1}.c-rg{background:#efe6d2}.c-w12{background:#eceef2}.c-oyf{background:#2b2740}
+.cover img{display:block;height:auto}
+.cover .cp{width:112px;border-radius:16px 16px 0 0;box-shadow:0 0 0 4px #14161a}
+.cover .cw{width:340px;border-radius:10px 10px 0 0;box-shadow:0 8px 24px rgba(20,22,26,.18)}
+.cover .cw2{width:300px;border-radius:10px 10px 0 0}
+.cover .cx{width:100px;border-radius:14px 14px 0 0}
+.card .cb{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-size:20px;letter-spacing:-.01em}
+.card .d{font-size:14.5px;color:var(--mute)}
+.card dl{display:grid;grid-template-columns:70px 1fr;gap:4px 10px;font-size:13.5px}
+.card dt{color:var(--mute)}
+.card dd.r{color:var(--ok);font-weight:600}
+.card .btn{margin-top:auto;align-self:flex-start}
+.sk{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sk div{border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.sk b{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:8px}
+.sk span{display:inline-block;font-size:13.5px;padding:3px 10px;border-radius:8px;background:var(--soft);border:1px solid var(--line);margin:0 5px 6px 0}
+.contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:10px}
+.contacts a{display:block;padding:14px 16px;border:1px solid var(--line);border-radius:12px;text-decoration:none;font-weight:500;background:var(--soft);font-size:14.5px}
+footer{margin:44px 0 32px;color:var(--mute);font-size:13px}
+dialog{border:none;border-radius:20px;padding:0;max-width:860px;width:calc(100% - 24px);max-height:92vh;margin:auto;color:var(--ink)}
+dialog::backdrop{background:rgba(20,22,26,.55)}
+.dh{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+.dh h3{font-size:20px}
+.dh button{font:inherit;font-size:14px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 14px;cursor:pointer}
+.db{padding:6px 22px 22px}
+.gal{display:flex;gap:12px;overflow-x:auto;padding:14px 0;align-items:flex-start}
+.gal figure{flex:0 0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.gal .g-m{width:180px}.gal .g-d{width:380px}
+.gal img{display:block;width:100%;height:auto}
+.drow{display:grid;grid-template-columns:150px 1fr;gap:6px 20px;padding:14px 0;border-top:1px solid var(--line);font-size:15px}
+.drow dt{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;padding-top:2px}
+.drow ol,.drow ul{padding-left:19px}.drow li{margin-bottom:4px}
+.drow.res{background:var(--okbg);border:1px solid var(--okline);border-radius:14px;padding:14px 16px;margin:4px 0}
+.drow.res dt{color:var(--ok)}
+.m3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.m3 div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;background:var(--soft)}
+.m3 small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:4px;font-weight:600}
+.m3 ul{padding-left:16px}
+@media(max-width:760px){.grid,.sk{grid-template-columns:1fr}.xrow,.drow{grid-template-columns:1fr}.m3{grid-template-columns:1fr}nav a.nl{display:none}.db{padding:4px 16px 18px}.gal .g-m{width:130px}.gal .g-d{width:260px}}
 '''
 
+def li(items): return ''.join('<li>%s</li>' % E(x) for x in items)
+
 def page(L):
-    # переключатель языка и автоопределение
-    detect = ''
-    if L['lang'] == 'ru':
-        detect = ("<script>try{var s=localStorage.getItem('lang'),n=((navigator.languages&&navigator.languages[0])||navigator.language||'ru').toLowerCase();"
-                  "if(s==='en'||(!s&&n.indexOf('en')===0)){location.replace('/en/')}}catch(e){}</script>")
-    else:
-        detect = ("<script>try{if(localStorage.getItem('lang')==='ru'){location.replace('/')}}catch(e){}</script>")
+    detect = ("<script>try{var s=localStorage.getItem('lang'),n=((navigator.languages&&navigator.languages[0])||navigator.language||'ru').toLowerCase();"
+              "if(s==='en'||(!s&&n.indexOf('en')===0)){location.replace('/en/')}}catch(e){}</script>") if L['lang']=='ru' else \
+             "<script>try{if(localStorage.getItem('lang')==='ru'){location.replace('/')}}catch(e){}</script>"
     setlang = "try{localStorage.setItem('lang','%s')}catch(e){}" % ('en' if L['alt_label']=='EN' else 'ru')
-    o = []
-    o.append('<!doctype html>\n<html lang="%s">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n%s\n<title>%s</title>\n<meta name="description" content="%s">' % (L['lang'], detect, E(L['title']), E(L['desc'])))
+    o = ['<!doctype html>\n<html lang="%s">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n%s\n<title>%s</title>\n<meta name="description" content="%s">' % (L['lang'], detect, E(L['title']), E(L['desc']))]
     o.append('<link rel="alternate" hreflang="ru" href="/"><link rel="alternate" hreflang="en" href="/en/">')
-    o.append('<meta property="og:title" content="%s"><meta property="og:description" content="%s">' % (E(L['title']), E(L['desc'])))
+    o.append('<meta property="og:title" content="%s"><meta property="og:description" content="%s"><meta property="og:type" content="website">' % (E(L['title']), E(L['desc'])))
     o.append('<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">')
     o.append('<style>%s</style>\n</head>\n<body>' % CSS)
     nav = ''.join('<a class="nl" href="%s">%s</a>' % (h, E(t)) for h, t in L['nav'])
-    o.append('<header class="top"><div class="wrap"><b>%s</b><nav>%s<div class="lang"><span>%s</span><a href="%s" onclick="%s">%s</a></div></nav></div></header>' % (
-        'Андрей Перепечай' if L['lang']=='ru' else 'Andrey Perepechay', nav, L['cur_label'], L['alt_url'], setlang, L['alt_label']))
-    o.append('<main class="wrap"><section class="hero"><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn dark" href="#cases">%s</a><a class="btn" href="https://t.me/andrew_727">%s</a></div><div class="facts">' % (E(L['h1']), E(L['lead']), E(L['cta1']), E(L['cta2'])))
+    o.append('<header class="top"><div class="wrap"><b>%s</b><nav>%s<div class="lang"><span>%s</span><a href="%s" onclick="%s">%s</a></div></nav></div></header>' % (E(L['name']), nav, L['cur_label'], L['alt_url'], setlang, L['alt_label']))
+    o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn dark" href="#experience">%s</a><a class="btn" href="#projects">%s</a><a class="btn" href="https://t.me/andrew_727">%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), E(L['lead']), E(L['b_exp']), E(L['b_proj']), E(L['b_tg'])))
     for b, t in L['facts']:
         o.append('<div class="fact"><b>%s</b><span>%s</span></div>' % (E(b), E(t)))
     o.append('</div></section>')
-    o.append('<div class="sechead"><h2 class="sec" id="cases">%s</h2><button class="toggleall" type="button" id="tg" data-e="%s" data-c="%s">%s</button></div>' % (E(L['cases_h']), E(L['expand']), E(L['collapse']), E(L['collapse'])))
-    for i, c in enumerate(L['cases']):
-        alts = dict(('a%d' % (k+1), E(a)) for k, a in enumerate(c['alts']))
-        g = gallery(c['kind']).format(**alts)
-        tags = ''.join('<span class="tag%s">%s</span>' % (' role' if k == 0 else '', E(t)) for k, t in enumerate(c['tags']))
-        o.append('<details class="case"%s><summary><div class="num">%s</div><h3>%s</h3><p class="one">%s</p><div class="tags">%s</div>'
-                 '<div class="peek"><div><small>%s</small>%s</div><div class="r"><small>%s</small>%s</div></div><span class="chev"></span></summary><div class="more">' % (
-                 ' open' if i == 0 else '', c['n'], E(c['name']), E(c['one']), tags, E(L['peek_task']), E(c['peek_task'][0].upper()+c['peek_task'][1:]), E(L['peek_res']), E(c['peek_res'])))
-        o.append(g)
-        o.append('<dl class="rows">')
-        o.append('<div class="row"><dt>%s</dt><dd>%s</dd></div>' % (E(L['l_problem']), E(c['problem'])))
-        o.append('<div class="row"><dt>%s</dt><dd>%s</dd></div>' % (E(L['l_role']), E(c['role'])))
-        o.append('<div class="row"><dt>%s</dt><dd><ol>%s</ol></dd></div>' % (E(L['l_done']), ''.join('<li>%s</li>' % E(x) for x in c['done'])))
-        tiles = ''.join('<div class="tile"><b>%s</b><span>%s</span></div>' % (E(a), E(b)) for a, b in c['tiles'])
-        pts = ''.join('<li>%s</li>' % E(x) for x in c['result_pts'])
-        o.append('<div class="row res"><dt>%s</dt><dd><div class="tiles">%s</div><ul>%s</ul></dd></div>' % (E(L['l_result']), tiles, pts))
-        o.append('<div class="row"><dt>%s</dt><dd><div class="tools">%s</div></dd></div>' % (E(L['l_tools']), ''.join('<span>%s</span>' % E(x) for x in c['tools'])))
-        rows = ''
-        for name, main, how, tgt in c['metrics']:
-            rows += '<tr><td>%s%s</td><td>%s</td><td class="t">%s</td></tr>' % (E(name), ('<span class="star">%s</span>' % E(L['m_main'])) if main else '', E(how), E(tgt))
-        o.append('<div class="row"><dt>%s</dt><dd><table><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody>%s</tbody></table><p class="note">%s</p></dd></div>' % (E(L['l_metrics']), E(L['m_head'][0]), E(L['m_head'][1]), E(L['m_head'][2]), rows, E(L['m_note'])))
-        o.append('<div class="row"><dt>%s</dt><dd>%s</dd></div>' % (E(L['l_lesson']), E(c['lesson'])))
-        o.append('</dl></div></details>')
-    o.append('<div class="sechead"><h2 class="sec" id="about">%s</h2></div><div class="exp">' % E(L['about_h']))
-    for a, b in L['about']:
-        o.append('<div><b>%s</b><span>%s</span></div>' % (E(a), E(b)))
-    o.append('</div><div class="sechead"><h2 class="sec" id="contact">%s</h2></div><div class="contacts"><a href="https://t.me/andrew_727">Telegram: @andrew_727</a><a href="mailto:perepechayandrew@gmail.com">perepechayandrew@gmail.com</a><a href="tel:+79163448547">+7 (916) 344-85-47</a></div>' % E(L['contact_h']))
-    o.append('<footer>© 2026 %s</footer></main>' % ('Андрей Перепечай' if L['lang']=='ru' else 'Andrey Perepechay'))
-    o.append("<script>var tg=document.getElementById('tg'),ds=[].slice.call(document.querySelectorAll('details.case'));"
-             "function sync(){var all=ds.every(function(d){return d.open});tg.textContent=all?tg.dataset.c:tg.dataset.e}"
-             "tg.addEventListener('click',function(){var all=ds.every(function(d){return d.open});ds.forEach(function(d){d.open=!all});sync()});"
-             "ds.forEach(function(d){d.addEventListener('toggle',sync)});sync();</script></body></html>")
+    # опыт
+    o.append('<h2 class="sec" id="experience">%s</h2>' % E(L['exp_h']))
+    xl = L['x_lbl']
+    for x in L['exp']:
+        o.append('<article class="xp"><div class="xp-h"><b>%s</b><span>%s</span></div><div class="xp-p">%s</div><dl>' % (E(x['co']), E(x['per']), E(x['pos'])))
+        o.append('<div class="xrow"><dt>%s</dt><dd>%s</dd></div>' % (E(xl['project']), E(x['project'])))
+        o.append('<div class="xrow"><dt>%s</dt><dd>%s</dd></div>' % (E(xl['scale']), E(x['scale'])))
+        o.append('<div class="xrow"><dt>%s</dt><dd>%s</dd></div>' % (E(xl['resp']), E(x['resp'])))
+        o.append('<div class="xrow res"><dt>%s</dt><dd><ul>%s</ul></dd></div></dl></article>' % (E(xl['res']), li(x['res'])))
+    # проекты
+    o.append('<h2 class="sec" id="projects">%s</h2><p class="sub">%s</p><div class="grid">' % (E(L['proj_h']), E(L['proj_sub'])))
+    pl = L['p_lbl']
+    for p in L['projects']:
+        o.append('<article class="card">%s<div class="cb"><h3>%s</h3><p class="d">%s</p><dl><dt>%s</dt><dd>%s</dd><dt>%s</dt><dd>%s</dd><dt>%s</dt><dd class="r">%s</dd></dl><button class="btn" type="button" data-open="%s">%s</button></div></article>' % (
+            cover(p['id'], p['alts'][0]), E(p['name']), E(p['desc']), E(pl['role']), E(p['role']), E(pl['stage']), E(p['stage']), E(pl['res']), E(p['res_short']), p['id'], E(pl['more'])))
+    o.append('</div>')
+    # навыки
+    o.append('<h2 class="sec" id="skills">%s</h2><div class="sk">' % E(L['sk_h']))
+    for t, items in L['skills']:
+        o.append('<div><b>%s</b>%s</div>' % (E(t), ''.join('<span>%s</span>' % E(i) for i in items)))
+    o.append('</div>')
+    o.append('<h2 class="sec" id="contact">%s</h2><div class="contacts"><a href="https://t.me/andrew_727">Telegram: @andrew_727</a><a href="mailto:perepechayandrew@gmail.com">perepechayandrew@gmail.com</a><a href="tel:+79163448547">+7 (916) 344-85-47</a></div>' % E(L['c_h']))
+    o.append('<footer>© 2026 %s</footer></main>' % E(L['name']))
+    # диалоги
+    dl = L['d_lbl']
+    for p in L['projects']:
+        o.append('<dialog id="d-%s" aria-labelledby="t-%s"><div class="dh"><h3 id="t-%s">%s</h3><button type="button" data-close>%s</button></div><div class="db">' % (p['id'], p['id'], p['id'], E(p['name']), E(dl['close'])))
+        o.append(gallery(p['id'], p['alts']))
+        o.append('<dl>')
+        o.append('<div class="drow"><dt>%s</dt><dd>%s</dd></div>' % (E(dl['about']), E(p['about'])))
+        o.append('<div class="drow"><dt>%s</dt><dd>%s</dd></div>' % (E(dl['problem']), E(p['problem'])))
+        o.append('<div class="drow"><dt>%s</dt><dd>%s</dd></div>' % (E(dl['role']), E(p['role_d'])))
+        o.append('<div class="drow"><dt>%s</dt><dd><ol>%s</ol></dd></div>' % (E(dl['done']), li(p['done'])))
+        o.append('<div class="drow res"><dt>%s</dt><dd><ul>%s</ul></dd></div>' % (E(dl['result']), li(p['result'])))
+        o.append('<div class="drow"><dt>%s</dt><dd><div class="m3"><div><small>%s</small>%s</div><div><small>%s</small>%s<ul>%s</ul></div><div><small>%s</small><ul>%s</ul></div></div></dd></div>' % (
+            E(dl['metrics']), E(dl['fact']), E(p['fact'][0]), E(dl['main']), E(p['main']), li(p['aux']), E(dl['events']), li(p['events'])))
+        o.append('</dl></div></dialog>')
+    o.append("""<script>
+(function(){
+var ds={};[].forEach.call(document.querySelectorAll('dialog'),function(d){ds[d.id]=d});
+function open(id){var d=ds['d-'+id];if(d&&!d.open){d.showModal();try{history.replaceState(null,'','#'+id)}catch(e){}}}
+[].forEach.call(document.querySelectorAll('[data-open]'),function(b){b.addEventListener('click',function(){open(b.dataset.open)})});
+[].forEach.call(document.querySelectorAll('dialog'),function(d){
+ d.addEventListener('click',function(e){if(e.target===d||e.target.hasAttribute('data-close'))d.close()});
+ d.addEventListener('close',function(){try{history.replaceState(null,'',location.pathname)}catch(e){}});
+});
+function fromHash(){var h=location.hash.replace('#','');if(h&&ds['d-'+h])open(h)}fromHash();window.addEventListener('hashchange',fromHash);
+})();
+</script></body></html>""")
     return '\n'.join(o)
 
 open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8').write(page(RU))
