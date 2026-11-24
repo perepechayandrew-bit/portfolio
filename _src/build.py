@@ -56,16 +56,16 @@ RU = dict(
        scale='Бюджет около 260 млн руб. Три взаимосвязанные системы, три функциональных модуля, около 300 внутренних пользователей. 3 команды разработки, около 30 человек, 3 тимлида.',
        resp='Бюджет, ресурсы и загрузка команд, зависимости между системами, эскалации заказчика.',
        res=['Три модуля импортозамещения запущены и масштабируются.','Отклонений от плана по бюджету нет.','Подготовил новый проект на 77 млн руб.: оценки команд, бюджет, финансовая модель, сроки с заказчиком.','5 квартальных поставок подряд в срок и в согласованном объёме.']),
-  dict(co='СИБУР', pos='Проектный офис (PMO)', per='06.2024 — 11.2024',
-       project='Корпоративная база знаний с поиском на основе больших языковых моделей и RAG, внутри контура компании.',
-       scale='Около 20 000 пользователей, подключена вся компания. Бюджет около 350 млн руб.',
-       resp='Бюджет и сроки, контрольные точки, бэклог из 100+ гипотез (Jira, приоритизация RICE), планирование спринтов, груминг, обзоры спринтов, подрядчики, обучение пользователей.',
-       res=['Контрольные точки пройдены с отклонением по бюджету менее 15%.','Процесс подготовки к контрольным точкам в Confluence: экономия около 7 человеко-дней на каждой квартальной точке.','Рост ежедневных активных пользователей (DAU) на 15% за счёт обучения и коммуникаций.']),
   dict(co='Технологии Доверия', pos='Бизнес-аналитик, руководитель проекта AI Co-Pilot', per='11.2024 — 08.2025',
        project='Сервис прогнозирования движения денежных средств для казначейства на машинном обучении.',
        scale='Кросс-функциональная команда: backend, frontend, DevOps, аналитика, машинное обучение.',
        resp='План, бэклог и дорожная карта, требования, демонстрации, исследования рынка.',
        res=['Вместе с командой машинного обучения повысил точность прогноза с 70% до 85% на исторических данных.','Подготовил блок демонстраций для пилота в нефтехимической компании.','Исследование для облачного хранилища банка: 10 фокус-групп, 70+ гипотез, 10 инициатив. Клиент заказал повторный проект.']),
+  dict(co='СИБУР', pos='Проектный офис (PMO)', per='06.2024 — 11.2024',
+       project='Корпоративная база знаний с поиском на основе больших языковых моделей и RAG, внутри контура компании.',
+       scale='Около 20 000 пользователей, подключена вся компания. Бюджет около 350 млн руб.',
+       resp='Бюджет и сроки, контрольные точки, бэклог из 100+ гипотез (Jira, приоритизация RICE), планирование спринтов, груминг, обзоры спринтов, подрядчики, обучение пользователей.',
+       res=['Контрольные точки пройдены с отклонением по бюджету менее 15%.','Процесс подготовки к контрольным точкам в Confluence: экономия около 7 человеко-дней на каждой квартальной точке.','Рост ежедневных активных пользователей (DAU) на 15% за счёт обучения и коммуникаций.']),
  ],
  proj_h='Собственные продукты', proj_sub='Четыре продукта, которые я придумал, описал и вывел в рабочую версию.',
  p_lbl=dict(role='Роль',stage='Стадия',res='Результат',more='Подробнее'),
@@ -148,16 +148,16 @@ EN = dict(
        scale='Budget about 260 M RUB. Three connected systems, three functional modules, about 300 internal users. 3 development teams, about 30 people, 3 team leads.',
        resp='Budget, resources and team load, dependencies between systems, customer escalations.',
        res=['Three import-substitution modules launched and scaling.','No budget deviations from plan.','Prepared a new 77 M RUB project: team estimates, budget, financial model, timeline agreed with the customer.','5 quarterly deliveries in a row on time and in the agreed scope.']),
-  dict(co='SIBUR', pos='Project Management Office (PMO)', per='06.2024 — 11.2024',
-       project='Corporate knowledge base with search on large language models and RAG, inside the company perimeter.',
-       scale='About 20,000 users, the whole company connected. Budget about 350 M RUB.',
-       resp='Budget and timeline, checkpoints, a backlog of 100+ hypotheses (Jira, RICE prioritization), sprint planning, grooming, sprint reviews, contractors, user training.',
-       res=['Checkpoints passed with budget deviation under 15%.','Checkpoint preparation process in Confluence: about 7 person-days saved at each quarterly checkpoint.','Daily active users (DAU) up 15% through training and communication.']),
   dict(co='Technologies of Trust', pos='Business Analyst, Project Lead of AI Co-Pilot', per='11.2024 — 08.2025',
        project='Machine-learning cash flow forecasting service for corporate treasury.',
        scale='Cross-functional team: backend, frontend, DevOps, analytics, machine learning.',
        resp='Plan, backlog and roadmap, requirements, demos, market research.',
        res=['With the machine learning team raised forecast accuracy from 70% to 85% on historical data.','Prepared the demo block for a pilot at a petrochemical company.','Research for a bank cloud storage: 10 focus groups, 70+ hypotheses, 10 initiatives. The client ordered a follow-up project.']),
+  dict(co='SIBUR', pos='Project Management Office (PMO)', per='06.2024 — 11.2024',
+       project='Corporate knowledge base with search on large language models and RAG, inside the company perimeter.',
+       scale='About 20,000 users, the whole company connected. Budget about 350 M RUB.',
+       resp='Budget and timeline, checkpoints, a backlog of 100+ hypotheses (Jira, RICE prioritization), sprint planning, grooming, sprint reviews, contractors, user training.',
+       res=['Checkpoints passed with budget deviation under 15%.','Checkpoint preparation process in Confluence: about 7 person-days saved at each quarterly checkpoint.','Daily active users (DAU) up 15% through training and communication.']),
  ],
  proj_h='Products of my own', proj_sub='Four products I defined, specified and brought to a working version.',
  p_lbl=dict(role='Role',stage='Stage',res='Result',more='Details'),
@@ -338,7 +338,7 @@ def page(L):
     o.append('<h2 class="sec" id="experience">%s</h2>' % E(L['exp_h']))
     xl = L['x_lbl']
     for i, x in enumerate(L['exp']):
-        B = BRAND[i]
+        B = BRAND[(0,2,1)[i]]
         o.append('<article class="xp" style="--c:%s;--ct:%s;--tint:%s;--line2:%s"><div class="xp-h"><b><i class="dot"></i>%s</b><span>%s</span></div><div class="xp-p">%s</div><dl>' % (B['c'], B['ct'], B['tint'], B['line'], E(x['co']), E(x['per']), E(x['pos'])))
         o.append('<div class="xrow"><dt>%s</dt><dd>%s</dd></div>' % (E(xl['project']), E(x['project'])))
         o.append('<div class="xrow"><dt>%s</dt><dd>%s</dd></div>' % (E(xl['scale']), E(x['scale'])))
@@ -383,7 +383,7 @@ function open(id){var d=ds['d-'+id];if(d&&!d.open){d.showModal();try{history.rep
 });
 function fromHash(){var h=location.hash.replace('#','');if(h&&ds['d-'+h])open(h)}fromHash();window.addEventListener('hashchange',fromHash);
 })();
-</script></body></html>""")
+</script><script defer src="/_vercel/insights/script.js"></script></body></html>""")
     return '\n'.join(o)
 
 open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8').write(page(RU))
