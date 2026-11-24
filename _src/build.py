@@ -476,8 +476,9 @@ if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es
 [].forEach.call(tb,function(b){b.addEventListener('click',function(){tab(b.dataset.tab)})});
 function fromHash(){var h=location.hash.replace('#','');if(!h)return;
  if(ds['d-'+h]){tab('prod');open(h);return}
- if(h==='experience'){tab('exp')}else if(h==='projects'){tab('prod')}
- var el=document.getElementById(h);if(el)el.scrollIntoView()}
+}
+[].forEach.call(document.querySelectorAll('a[href="#experience"],a[href="#projects"]'),function(a){a.addEventListener('click',function(e){e.preventDefault();tab(a.getAttribute('href')==='#experience'?'exp':'prod');document.querySelector('.tabs').scrollIntoView({behavior:'smooth',block:'start'})})});
+if(location.hash==='#experience'||location.hash==='#projects'){try{history.replaceState(null,'',location.pathname)}catch(e){}}
 fromHash();window.addEventListener('hashchange',fromHash);
 })();
 </script><script defer src="/_vercel/insights/script.js"></script></body></html>""")
