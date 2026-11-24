@@ -46,7 +46,7 @@ RU = dict(
  nav=[('#projects','Продукты'),('#experience','Проекты'),('#skills','Навыки'),('#contact','Контакты')],
  role='Product Owner & Project Manager',
  lead='Project Manager в банковском и корпоративном IT: проекты с бюджетом более 250 млн руб., 3 команды разработки (около 30 человек). Закрыл 5 квартальных поставок подряд в срок и в согласованном объёме. Вёл два ИИ-продукта: корпоративную базу знаний с нейросетевым поиском на 20 000 пользователей и ML-сервис прогнозирования для казначейства. Использую нейросети в работе: сократил подготовку отчётности в 4 раза, сам запускаю продукты без команды.',
- b_exp='Проекты', b_proj='Продукты', b_tg='Telegram',
+ b_exp='Проекты', b_proj='Продукты', b_tg='Написать в Telegram',
  facts=[('≈260 млн руб.','бюджет платформы банковских взаиморасчётов. 3 команды, около 30 человек. Axenix.'),
         ('≈20 000','пользователей корпоративной базы знаний с нейросетевым поиском. СИБУР.'),
         ('5 продуктов','собственные продукты от идеи до запуска. Один в App Store, одна онлайн-игра с 50+ игроками.')],
@@ -150,7 +150,7 @@ EN = dict(
  nav=[('#projects','Products'),('#experience','Projects'),('#skills','Skills'),('#contact','Contact')],
  role='Product Owner & Project Manager',
  lead='Project Manager in banking and corporate IT: projects with a budget above 250 million RUB, 3 development teams (about 30 people). Closed 5 quarterly deliveries in a row on time and in the agreed scope. Led two products with AI: a corporate knowledge base with AI search (LLM, RAG) for 20,000 users and an ML forecasting service for treasury. I use AI at work: cut report preparation time by 4 times, and I launch products on my own without a team.',
- b_exp='Projects', b_proj='Products', b_tg='Telegram',
+ b_exp='Projects', b_proj='Products', b_tg='Message on Telegram',
  facts=[('≈260 M RUB','budget of a bank settlements platform. 3 teams, about 30 people. Axenix.'),
         ('≈20,000','users of a corporate knowledge base with AI search. SIBUR.'),
         ('5 products','my own products from idea to launch. One in the App Store, one online game with 50+ players.')],
@@ -271,7 +271,39 @@ nav a:hover{color:var(--ink)}
 .btn.dark{background:var(--ink);color:#fff}
 .tabs{display:inline-flex;gap:4px;margin-top:34px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--soft)}
 .tabs button{border:0;background:transparent;padding:9px 22px;border-radius:999px;font:inherit;font-size:15px;font-weight:600;color:var(--mute);cursor:pointer}
-.tabs button.on{background:var(--ink);color:#fff}
+.tabs{position:relative}
+.tabs .ind{position:absolute;top:4px;bottom:4px;left:0;width:0;border-radius:999px;background:var(--ink);transition:transform .45s cubic-bezier(.22,1,.36,1),width .45s cubic-bezier(.22,1,.36,1);z-index:0}
+.tabs button{position:relative;z-index:1;transition:color .3s}
+.tabs button.on{color:#fff}
+.panel{transition:opacity .2s ease,transform .2s ease}
+.panel.leave{opacity:0;transform:translateY(-8px)}
+.panel.enter{animation:panelIn .55s cubic-bezier(.22,1,.36,1)}
+@keyframes panelIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero>*{animation:up .8s cubic-bezier(.22,1,.36,1) both}
+.hero>.role{animation-delay:.05s}.hero>h1{animation-delay:.12s}.hero>.lead{animation-delay:.2s}.hero>.cta{animation-delay:.3s}.hero>.facts{animation-delay:.4s}
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.js .rv.in{opacity:1;transform:none}
+.grid .card:nth-child(2n).rv{transition-delay:.1s}
+.card{transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease}
+.card.rv.in:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(20,22,26,.12)}
+.cover img{transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.card:hover .cover img{transform:translateY(-6px) scale(1.04)}
+.fc{transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.card:hover .fc{transform:translateY(-6px) rotate(2deg)}.card:hover .fc2{transform:translateY(-4px) rotate(-7deg)}
+.btn{transition:transform .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.dark:hover{background:#2c3038}
+.btn.tg svg{transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.btn.tg:hover svg{transform:translate(2px,-2px) rotate(-8deg)}
+.fact{transition:transform .3s ease,box-shadow .3s ease}.fact:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(20,22,26,.08)}
+.contacts a{transition:background .25s}
+.nl{transition:color .2s}
+dialog[open]{animation:pop .35s cubic-bezier(.22,1,.36,1)}
+dialog[open]::backdrop{animation:fade .35s ease}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
 .panel[hidden]{display:none}
 .btn.tg{background:#229ED9;border-color:#229ED9;color:#fff;display:inline-flex;align-items:center;gap:8px;margin-left:auto;font-weight:600;box-shadow:0 4px 14px rgba(34,158,217,.35)}
 .btn.tg:hover{background:#1b8cc2}
@@ -359,7 +391,7 @@ def page(L):
     o.append('<link rel="alternate" hreflang="ru" href="/"><link rel="alternate" hreflang="en" href="/en/">')
     o.append('<meta property="og:title" content="%s"><meta property="og:description" content="%s"><meta property="og:type" content="website">' % (E(L['title']), E(L['desc'])))
     o.append('<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">')
-    o.append('<style>%s</style>\n</head>\n<body>' % CSS)
+    o.append('<style>%s</style>\n</head>\n<body>\n<script>document.documentElement.classList.add("js")</script>' % CSS)
     nav = ''.join('<a class="nl" href="%s">%s</a>' % (h, E(t)) for h, t in L['nav'])
     o.append('<header class="top"><div class="wrap"><b>%s</b><nav>%s<div class="lang"><span>%s</span><a href="%s" onclick="%s">%s</a></div></nav></div></header>' % (E(L['name']), nav, L['cur_label'], L['alt_url'], setlang, L['alt_label']))
     o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn dark" href="#projects">%s</a><a class="btn" href="#experience">%s</a><a class="btn tg" href="https://t.me/andrew_727"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3 18.6 19.6c-.2 1.1-.9 1.3-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6.1 13 1.2 11.5c-1.1-.3-1.1-1 .2-1.5L20.5 2.6c.9-.3 1.7.2 1.4 1.7z"/></svg>%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), E(L['lead']), E(L['b_proj']), E(L['b_exp']), E(L['b_tg'])))
@@ -389,7 +421,7 @@ def page(L):
     o.append('</div></section>')
     # навыки
     prod_html = ''.join(o); o = _keep
-    o.append('<div class="tabs" role="tablist"><button type="button" role="tab" class="on" data-tab="prod">%s</button><button type="button" role="tab" data-tab="exp">%s</button></div>' % (E(L['b_proj']), E(L['b_exp'])))
+    o.append('<div class="tabs" role="tablist"><i class="ind"></i><button type="button" role="tab" class="on" data-tab="prod">%s</button><button type="button" role="tab" data-tab="exp">%s</button></div>' % (E(L['b_proj']), E(L['b_exp'])))
     o.append('<div class="panel" id="p-prod">' + prod_html + '</div><div class="panel" id="p-exp" hidden>' + exp_html + '</div>')
     o.append('<h2 class="sec" id="skills">%s</h2><div class="sk">' % E(L['sk_h']))
     for t, items in L['skills']:
@@ -420,7 +452,15 @@ function open(id){var d=ds['d-'+id];if(d&&!d.open){d.showModal();try{history.rep
  d.addEventListener('close',function(){try{history.replaceState(null,'',location.pathname)}catch(e){}});
 });
 var tb=document.querySelectorAll('[data-tab]');
-function tab(n){[].forEach.call(tb,function(b){b.classList.toggle('on',b.dataset.tab===n)});document.getElementById('p-prod').hidden=n!=='prod';document.getElementById('p-exp').hidden=n!=='exp'}
+var ind=document.querySelector('.tabs .ind'),cur='prod',tk=0;
+function mv(){var b=document.querySelector('.tabs .on');if(b&&ind){ind.style.width=b.offsetWidth+'px';ind.style.transform='translateX('+(b.offsetLeft-4)+'px)'}}
+function tab(n){if(n===cur)return;var from=document.getElementById('p-'+cur),to=document.getElementById('p-'+n),t=++tk;cur=n;
+ [].forEach.call(tb,function(b){b.classList.toggle('on',b.dataset.tab===n)});mv();
+ from.classList.add('leave');
+ setTimeout(function(){if(t!==tk)return;from.hidden=true;from.classList.remove('leave');to.hidden=false;to.classList.remove('enter');void to.offsetWidth;to.classList.add('enter')},200)}
+mv();window.addEventListener('load',mv);window.addEventListener('resize',mv);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(mv);
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+ [].forEach.call(document.querySelectorAll('.contacts,.tabs,.xp,.card,.sk,.own-h,h2.sec'),function(el){el.classList.add('rv');io.observe(el)})}
 [].forEach.call(tb,function(b){b.addEventListener('click',function(){tab(b.dataset.tab)})});
 function fromHash(){var h=location.hash.replace('#','');if(!h)return;
  if(ds['d-'+h]){tab('prod');open(h);return}
