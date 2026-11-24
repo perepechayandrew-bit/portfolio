@@ -3,217 +3,178 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Андрей Перепечай — Product Owner / Project Manager</title>
-<meta name="description" content="Портфолио: продукты от исследования до запуска. Product Owner, Project Manager.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>try{var s=localStorage.getItem('lang'),n=((navigator.languages&&navigator.languages[0])||navigator.language||'ru').toLowerCase();if(s==='en'||(!s&&n.indexOf('en')===0)){location.replace('/en/')}}catch(e){}</script>
+<title>Андрей Перепечай — Product Owner, Project Manager</title>
+<meta name="description" content="Портфолио: четыре продукта с задачей, ролью, результатом и метриками. Product Owner и Project Manager.">
+<link rel="alternate" hreflang="ru" href="/"><link rel="alternate" hreflang="en" href="/en/">
+<meta property="og:title" content="Андрей Перепечай — Product Owner, Project Manager"><meta property="og:description" content="Портфолио: четыре продукта с задачей, ролью, результатом и метриками. Product Owner и Project Manager.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
 <style>
-:root{--bg:#fff;--ink:#14161a;--mute:#5f6670;--line:#e8eaee;--soft:#f6f7f9;--accent:#14161a}
+:root{--bg:#fff;--ink:#14161a;--mute:#5f6670;--line:#e4e7ec;--soft:#f6f7f9;--ok:#0f7b4f;--okbg:#e8f6ee;--okline:#bfe5cf}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-header.top{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+header.top{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
 header.top .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
 header.top b{font-weight:600}
-nav a{margin-left:20px;text-decoration:none;color:var(--mute);font-size:14px}
+nav{display:flex;align-items:center;gap:20px}
+nav a{text-decoration:none;color:var(--mute);font-size:14px}
 nav a:hover{color:var(--ink)}
-.hero{padding:72px 0 40px}
-.hero h1{font-size:clamp(34px,6vw,60px);line-height:1.05;letter-spacing:-.03em;font-weight:700;max-width:820px}
-.hero p.lead{margin-top:20px;font-size:clamp(17px,2.2vw,21px);color:var(--mute);max-width:700px}
-.cta{margin-top:28px;display:flex;gap:10px;flex-wrap:wrap}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-size:13px}
+.lang span,.lang a{padding:4px 11px;display:block}
+.lang span{background:var(--ink);color:#fff}
+.lang a{color:var(--mute)}
+.hero{padding:64px 0 24px}
+.hero h1{font-size:clamp(32px,5.4vw,54px);line-height:1.08;letter-spacing:-.03em;font-weight:700;max-width:820px}
+.hero p.lead{margin-top:16px;font-size:clamp(17px,2vw,20px);color:var(--mute);max-width:680px}
+.cta{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-block;padding:11px 20px;border-radius:999px;font-size:15px;font-weight:500;text-decoration:none;border:1px solid var(--ink)}
 .btn.dark{background:var(--ink);color:#fff}
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:40px 0 8px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:36px 0 0}
 .fact{border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:var(--soft)}
-.fact b{display:block;font-size:15px}
-.fact span{font-size:14px;color:var(--mute)}
-h2.sec{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600;margin:64px 0 18px}
-.case{border:1px solid var(--line);border-radius:28px;overflow:hidden;margin-bottom:44px;background:#fff}
-.case-head{padding:30px 32px 8px}
-.case-head .num{font-size:13px;color:var(--mute)}
-.case-head h3{font-size:clamp(26px,4vw,38px);letter-spacing:-.02em;margin:4px 0 8px}
-.case-head p{color:var(--mute);max-width:720px;font-size:17px}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.tag{font-size:13px;padding:5px 12px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--ink)}
+.fact b{display:block;font-size:30px;letter-spacing:-.02em;line-height:1.1}
+.fact span{display:block;margin-top:6px;font-size:14px;color:var(--mute)}
+.sechead{display:flex;justify-content:space-between;align-items:center;margin:56px 0 16px}
+h2.sec{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.toggleall{font:inherit;font-size:13px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 14px;cursor:pointer;color:var(--ink)}
+.case{border:1px solid var(--line);border-radius:24px;margin-bottom:20px;background:#fff;overflow:hidden}
+.case summary{list-style:none;cursor:pointer;padding:24px 28px;position:relative}
+.case summary::-webkit-details-marker{display:none}
+.case .num{font-size:13px;color:var(--mute)}
+.case h3{font-size:clamp(24px,3.4vw,32px);letter-spacing:-.02em;margin:2px 0 4px;padding-right:40px}
+.case .one{color:var(--mute);font-size:16px;max-width:720px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{font-size:13px;padding:4px 11px;border-radius:999px;background:var(--soft);border:1px solid var(--line)}
 .tag.role{background:var(--ink);color:#fff;border-color:var(--ink)}
-.stage{margin:22px 32px 0;border-radius:22px;padding:34px 20px;display:flex;gap:18px;justify-content:center;align-items:flex-start;overflow-x:auto}
+.peek{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.peek div{font-size:14.5px;padding:12px 14px;border-radius:12px;background:var(--soft);border:1px solid var(--line)}
+.peek div.r{background:var(--okbg);border-color:var(--okline)}
+.peek small{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
+.peek .r small{color:var(--ok)}
+.case[open] .peek{display:none}
+.chev{position:absolute;right:26px;top:28px;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.chev:after{content:"";width:7px;height:7px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg) translate(-1px,-1px);transition:transform .2s}
+.case[open] .chev:after{transform:rotate(225deg) translate(-1px,-1px)}
+.more{padding:0 28px 28px}
+.stage{border-radius:20px;padding:30px 18px;display:flex;gap:18px;justify-content:center;align-items:flex-start;overflow-x:auto;margin-bottom:8px}
 .stage.joyka{background:linear-gradient(135deg,#d9f5d4,#c9e9f2)}
 .stage.rg{background:linear-gradient(135deg,#efe3c8,#e3c9a8)}
-.stage.oyf{background:linear-gradient(135deg,#2a2440,#4a2f3d);align-items:center}
 .stage.w12{background:linear-gradient(135deg,#eceef2,#dfe3ea);flex-direction:column;align-items:center}
-.phone{flex:0 0 auto;width:200px;border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(20,22,26,.22),0 0 0 6px #14161a}
-.phone img{display:block;width:100%;height:auto}
-.widget{flex:0 0 auto;width:250px;filter:drop-shadow(0 18px 34px rgba(0,0,0,.45))}.widget img{display:block;width:100%;height:auto}.stage.oyf .desk{flex:1 1 auto;max-width:560px;min-width:300px}
-.phone.t1{margin-top:20px}.phone.t2{margin-top:0}
+.stage.oyf{background:linear-gradient(135deg,#2a2440,#4a2f3d);align-items:center}
+.phone{flex:0 0 auto;width:190px;border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(20,22,26,.22),0 0 0 6px #14161a}
+.phone img,.widget img,.desk img{display:block;width:100%;height:auto}
+.phone.t1{margin-top:20px}
+.widget{flex:0 0 auto;width:240px;filter:drop-shadow(0 18px 34px rgba(0,0,0,.45))}
 .desk{width:100%;max-width:760px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(20,22,26,.18)}
+.stage.oyf .desk{flex:1 1 auto;max-width:540px;min-width:300px}
 .desk .bar{height:26px;background:#f1f2f4;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 12px}
 .desk .bar i{width:9px;height:9px;border-radius:50%;background:#c9ccd2;display:block}
-.desk img{display:block;width:100%;height:auto}
 .desk-row{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;width:100%}
 .desk-row .desk{max-width:370px;flex:1 1 300px}
-.body{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 40px;padding:32px}
-.body .full{grid-column:1/-1}
-.body h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:8px;font-weight:600}
-.body p,.body li{font-size:15.5px}
-.body ul{padding-left:18px}
-.body li{margin-bottom:5px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:12px}
-.stat{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px}
-.stat b{display:block;font-size:24px;letter-spacing:-.02em}
-.stat span{font-size:13px;color:var(--mute)}
-.hyp{background:var(--soft);border:1px dashed #b9bec7;border-radius:14px;padding:14px 16px}
-.hyp small{display:block;color:var(--mute);margin-bottom:6px;font-size:12.5px}
+dl.rows{margin-top:10px}
+.row{display:grid;grid-template-columns:150px 1fr;gap:12px 28px;padding:20px 0;border-top:1px solid var(--line)}
+.row dt{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;padding-top:3px}
+.row dd{font-size:15.5px}
+.row ol{padding-left:20px}
+.row li{margin-bottom:6px}
+.row.res{background:var(--okbg);border:1px solid var(--okline);border-radius:16px;padding:20px;margin:6px 0;border-top:1px solid var(--okline)}
+.row.res dt{color:var(--ok)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:12px}
+.tile{background:#fff;border:1px solid var(--okline);border-radius:12px;padding:10px 12px}
+.tile b{display:block;font-size:26px;line-height:1.1;color:var(--ok);letter-spacing:-.02em}
+.tile span{font-size:13px;color:var(--mute)}
+.res ul{padding-left:18px}
+.res li{margin-bottom:4px}
 .tools{display:flex;flex-wrap:wrap;gap:7px}
 .tools span{font-size:13px;padding:4px 11px;border-radius:8px;background:#fff;border:1px solid var(--line)}
-.about{display:grid;grid-template-columns:1.2fr 1fr;gap:32px}
-.about p{margin-bottom:12px;color:#2b2f36}
-.contacts a{display:block;padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;font-weight:500}
-footer{margin:72px 0 40px;color:var(--mute);font-size:13px}
-@media(max-width:760px){.body{grid-template-columns:1fr;padding:22px}.case-head{padding:22px 22px 6px}.stage{margin:18px 16px 0}.about{grid-template-columns:1fr}nav a:not(:last-child){display:none}.phone{width:140px}.stage{justify-content:flex-start;padding:26px 14px;gap:14px}.stage.w12{align-items:stretch}.stage.rg{justify-content:center}}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th{text-align:left;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600;padding:0 10px 8px 0;border-bottom:1px solid var(--line)}
+td{padding:9px 10px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td.t{white-space:nowrap;font-weight:600}
+.star{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;background:var(--ink);color:#fff;margin-left:6px;font-weight:500;vertical-align:1px}
+.note{font-size:13px;color:var(--mute);margin-top:8px}
+.exp{border-top:1px solid var(--line)}
+.exp div{display:grid;grid-template-columns:200px 1fr;gap:8px 28px;padding:16px 0;border-bottom:1px solid var(--line)}
+.exp b{font-weight:600}
+.exp span{color:#2b2f36}
+.contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.contacts a{display:block;padding:16px 18px;border:1px solid var(--line);border-radius:14px;text-decoration:none;font-weight:500;background:var(--soft)}
+footer{margin:56px 0 40px;color:var(--mute);font-size:13px}
+@media(max-width:760px){.case summary{padding:20px}.more{padding:0 20px 22px}.peek{grid-template-columns:1fr}.row{grid-template-columns:1fr;gap:6px;padding:16px 0}.exp div{grid-template-columns:1fr;gap:2px}.phone{width:140px}.stage{padding:24px 14px;gap:14px;justify-content:flex-start}.stage.w12{align-items:stretch}.stage.rg{justify-content:center}.widget{width:190px}nav a.nl{display:none}.chev{right:18px;top:22px}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap"><b>Андрей Перепечай</b><nav><a href="#cases">Кейсы</a><a href="#about">Обо мне</a><a href="#contact">Контакты</a></nav></div></header>
-
-<main class="wrap">
-<section class="hero">
-<h1>Product Owner и Project Manager. Довожу продукт от исследования до запуска.</h1>
-<p class="lead">Исследую аудиторию, формулирую проблему и ограничения, расставляю приоритеты, собираю команду или AI-инструменты и выпускаю рабочий продукт. Ниже четыре продукта в одинаковом разборе: проблема, роль, решения, результат.</p>
-<div class="cta"><a class="btn dark" href="#cases">Смотреть кейсы</a><a class="btn" href="https://t.me/andrew_727">Написать в Telegram</a></div>
-<div class="facts">
-<div class="fact"><b>Product Owner</b><span>Joyka: исследование рынка, анализ аудитории, анкетирование</span></div>
-<div class="fact"><b>Полный цикл</b><span>Растущий город: от идеи до запуска, 50+ игроков</span></div>
-<div class="fact"><b>Работа с AI</b><span>Cursor, Claude и другие инструменты в ежедневной разработке</span></div>
-</div>
-</section>
-
-<h2 class="sec" id="cases">Кейсы</h2>
-
-<!-- JOYKA -->
-<article class="case">
-<div class="case-head"><div class="num">01</div><h3>Joyka</h3>
-<p>Мобильное приложение коротких медитаций для людей, которые хотят снизить стресс.</p>
-<div class="tags"><span class="tag role">Product Owner</span><span class="tag">Исследование</span><span class="tag">Работа с разработчиком и дизайнером</span><span class="tag">iOS</span></div></div>
+<header class="top"><div class="wrap"><b>Андрей Перепечай</b><nav><a class="nl" href="#cases">Кейсы</a><a class="nl" href="#about">Опыт</a><a class="nl" href="#contact">Контакты</a><div class="lang"><span>RU</span><a href="/en/" onclick="try{localStorage.setItem('lang','en')}catch(e){}">EN</a></div></nav></div></header>
+<main class="wrap"><section class="hero"><h1>Product Owner и Project Manager</h1><p class="lead">Три года в корпоративных ИТ-проектах. Четыре собственных продукта: от исследования до рабочей версии.</p><div class="cta"><a class="btn dark" href="#cases">Смотреть кейсы</a><a class="btn" href="https://t.me/andrew_727">Написать в Telegram</a></div><div class="facts">
+<div class="fact"><b>3 команды</b><span>около 10 человек в каждой. Платформа банковских расчётов, Axenix: бюджет, нагрузка команд, эскалации заказчика.</span></div>
+<div class="fact"><b>20 000</b><span>пользователей корпоративной базы знаний с нейросетевым поиском. СИБУР.</span></div>
+<div class="fact"><b>4 продукта</b><span>от идеи до рабочей версии. Ниже: задача, роль, результат, метрики.</span></div>
+<div class="fact"><b>50+</b><span>человек играли в онлайн-игру «Растущий город».</span></div>
+</div></section>
+<div class="sechead"><h2 class="sec" id="cases">Кейсы</h2><button class="toggleall" type="button" id="tg" data-e="Развернуть все" data-c="Свернуть все">Свернуть все</button></div>
+<details class="case" open><summary><div class="num">01</div><h3>Joyka</h3><p class="one">Мобильное приложение коротких медитаций для людей под стрессом.</p><div class="tags"><span class="tag role">Product Owner</span><span class="tag">iOS</span><span class="tag">Разработчик и дизайнер в команде</span></div><div class="peek"><div><small>Задача</small>Снизить стресс за 4–5 минут.</div><div class="r"><small>Результат</small>8 сценариев, 3 голоса, статистика серий. Приложение для iOS.</div></div><span class="chev"></span></summary><div class="more">
 <div class="stage joyka">
-<div class="phone t1"><img src="img/joyka-home.png" alt="Joyka: главный экран со списком медитаций" loading="lazy"></div>
-<div class="phone t2"><img src="img/joyka-timer.png" alt="Joyka: экран медитации «Удержи аппетит»" loading="lazy"></div>
-<div class="phone t1"><img src="img/joyka-settings.png" alt="Joyka: настройки звуков и голоса" loading="lazy"></div>
-<div class="phone t2"><img src="img/joyka-stats.png" alt="Joyka: личная статистика" loading="lazy"></div>
-</div>
-<div class="body">
-<div><h4>Проблема</h4><p>Люди, которые испытывают стресс, хотят снизить его быстро и в конкретной ситуации: перед сном, при желании сорваться на еде, перед важным решением. Длинные общие практики для этого неудобны.</p></div>
-<div><h4>Моя роль</h4><p>Product Owner. Исследовал рынок, анализировал аудиторию, запускал анкетирование, формулировал сценарии и требования. Продукт делал с разработчиком и дизайнером, кода сам не писал.</p></div>
-<div class="full"><h4>Что сделано</h4><ul>
-<li>Продукт построен на ситуациях, а не на абстрактных практиках: 8 сценариев по 4–5 минут («Приготовься ко сну», «Сними напряжение», «Удержи аппетит», «Прими решение» и другие).</li>
-<li>Настраиваемая среда: метроном, звуки природы, музыка 432 Гц, три голоса, раздельная громкость.</li>
-<li>Механики возвращения: ежедневное напоминание, серия медитаций, личная статистика.</li>
-</ul></div>
-<div><h4>Результат</h4><div class="stats"><div class="stat"><b>8</b><span>сценариев в первом релизе</span></div><div class="stat"><b>3</b><span>голоса и 3 канала звука</span></div></div></div>
-<div><h4>Инструменты</h4><div class="tools"><span>Анкетирование</span><span>Анализ рынка</span><span>Работа с разработчиком и дизайнером</span></div></div>
-<div class="full"><div class="hyp"><small>Рамка метрик: гипотезы, в проекте не измерялись</small>
-<b>North Star:</b> число завершённых медитаций на активного пользователя в неделю. <b>Поддерживающие:</b> доля пользователей, завершивших первую сессию; возврат на 7-й день; длина серии; доля завершённых сессий среди начатых.</div></div>
-<div class="full"><h4>Что бы сделал иначе</h4><p>Раньше ввёл бы события аналитики и проверял, какие из 8 сценариев возвращают людей, до расширения контента.</p></div>
-</div>
-</article>
-
-<!-- РАСТУЩИЙ ГОРОД -->
-<article class="case">
-<div class="case-head"><div class="num">02</div><h3>Растущий город</h3>
-<p>Многопользовательская настольная игра в браузере: быстрая партия, лобби по ссылке и боты.</p>
-<div class="tags"><span class="tag role">PM / PO</span><span class="tag">Полный цикл</span><span class="tag">Web</span><span class="tag">2026</span></div></div>
+<div class="phone t1"><img src="/img/joyka-home.webp" alt="Joyka: главный экран со списком медитаций" width="589" height="1280"></div>
+<div class="phone t2"><img src="/img/joyka-timer.webp" alt="Joyka: экран медитации «Удержи аппетит»" width="589" height="1280"></div>
+<div class="phone t1"><img src="/img/joyka-settings.webp" alt="Joyka: настройки звуков и голоса" width="589" height="1280"></div>
+<div class="phone t2"><img src="/img/joyka-stats.webp" alt="Joyka: личная статистика" width="589" height="1280"></div></div>
+<dl class="rows">
+<div class="row"><dt>Задача</dt><dd>Людям под стрессом нужна быстрая практика. Длинные общие курсы не подходят для ситуации «сейчас».</dd></div>
+<div class="row"><dt>Роль</dt><dd>Product Owner. Исследование рынка, анализ аудитории, анкетирование. Требования для разработчика и дизайнера. Код и дизайн делали они.</dd></div>
+<div class="row"><dt>Что сделано</dt><dd><ol><li>Исследовал рынок и аудиторию, провёл анкетирование.</li><li>Выделил 8 ситуаций по 4–5 минут: сон, напряжение, аппетит, решение и другие.</li><li>Описал настройки: метроном, звуки природы, музыка 432 Гц, 3 голоса, отдельная громкость каждого слоя.</li><li>Добавил возврат пользователя: ежедневное напоминание, серия дней, статистика по каждой медитации.</li></ol></dd></div>
+<div class="row res"><dt>Результат</dt><dd><div class="tiles"><div class="tile"><b>8</b><span>сценариев</span></div><div class="tile"><b>3</b><span>голоса</span></div><div class="tile"><b>3</b><span>слоя звука</span></div><div class="tile"><b>4–5 мин</b><span>одна сессия</span></div></div><ul><li>Готовое приложение для iOS с личной статистикой и серией.</li></ul></dd></div>
+<div class="row"><dt>Инструменты</dt><dd><div class="tools"><span>Анкетирование</span><span>Анализ рынка</span><span>Анализ аудитории</span></div></dd></div>
+<div class="row"><dt>Метрики</dt><dd><table><thead><tr><th>Метрика</th><th>Как считается</th><th>Цель</th></tr></thead><tbody><tr><td>Частота<span class="star">главная метрика</span></td><td>Завершённые сессии на активного пользователя в неделю</td><td class="t">3</td></tr><tr><td>Активация</td><td>Новые пользователи, завершившие первую сессию в день установки</td><td class="t">60%</td></tr><tr><td>Завершаемость</td><td>Завершённые сессии / начатые</td><td class="t">70%</td></tr><tr><td>Возврат на 7-й день</td><td>Пользователи, вернувшиеся на 7-й день</td><td class="t">20%</td></tr></tbody></table><p class="note">Цели — ориентиры, которые я задал бы продукту. Это не измеренные результаты.</p></dd></div>
+<div class="row"><dt>Вывод</dt><dd>Заложил бы события аналитики в первую версию: без них непонятно, какие сценарии возвращают людей.</dd></div>
+</dl></div></details>
+<details class="case"><summary><div class="num">02</div><h3>Растущий город</h3><p class="one">Онлайн-игра в браузере: партия за один клик, боты, лобби по ссылке.</p><div class="tags"><span class="tag role">Product Owner</span><span class="tag">Project Manager</span><span class="tag">Веб</span><span class="tag">Полный цикл</span></div><div class="peek"><div><small>Задача</small>Играть без ожидания компании.</div><div class="r"><small>Результат</small>50+ игроков, 3 языка, аналитика партий, проиндексирован в Google и Яндексе.</div></div><span class="chev"></span></summary><div class="more">
 <div class="stage rg">
-<div class="phone t1"><img src="img/rg-lobby.png" alt="Растущий город: лобби" loading="lazy"></div>
-<div class="phone t2"><img src="img/rg-market.png" alt="Растущий город: рынок и ход игрока" loading="lazy"></div>
-</div>
-<div class="body">
-<div><h4>Проблема</h4><p>Настольным играм нужна компания, а собрать людей в один момент трудно. Нужна игра, где можно начать за секунды и не ждать живых игроков.</p></div>
-<div><h4>Моя роль</h4><p>PM и PO в одном лице: идея, правила и баланс, приоритеты, релизы, аналитика. Реализация с помощью AI-инструментов.</p></div>
-<div class="full"><h4>Что сделано</h4><ul>
-<li>«Быстрая игра» за один клик: свободные места занимают боты (6 характеров с репликами), плюс приватные лобби по ссылке с PIN.</li>
-<li>Три режима длины партии, баланс карт (две итерации), туториал, чат с реакциями, кик игроков.</li>
-<li>Аналитика игр и админ-панель; SEO и FAQ; интерфейс на русском, английском и испанском.</li>
-<li>Исправил реальные продуктовые проблемы эксплуатации: блокировки соединения, переподключение игрока, мобильная версия.</li>
-</ul></div>
-<div><h4>Результат</h4><div class="stats"><div class="stat"><b>50+</b><span>игроков</span></div><div class="stat"><b>6</b><span>ботов-персонажей</span></div><div class="stat"><b>3</b><span>языка</span></div></div>
-<p style="margin-top:10px;font-size:13.5px;color:var(--mute)">Сейчас хостинг не продлён, публичной ссылки нет. Продукт был в рабочей эксплуатации на собственном домене.</p></div>
-<div><h4>Инструменты</h4><div class="tools"><span>Claude</span><span>Cursor</span><span>React + Vite</span><span>Node.js</span><span>Socket.io</span><span>SQLite</span><span>nginx</span><span>Git</span></div></div>
-<div class="full"><div class="hyp"><small>Рамка метрик: гипотезы для дальнейшей работы, часть данных собиралась в админ-панели</small>
-<b>North Star:</b> завершённые партии на игрока в неделю. <b>Поддерживающие:</b> доля игроков, дошедших до конца первой партии; повторная игра на следующий день; доля партий с ботами против живых игроков; время до начала партии.</div></div>
-<div class="full"><h4>Что бы сделал иначе</h4><p>Раньше запустил бы закрытый тест с 10–15 игроками и опрос после первой партии, и только затем наращивал контент.</p></div>
-</div>
-</article>
-
-<!-- WEEK12 -->
-<article class="case">
-<div class="case-head"><div class="num">03</div><h3>Week12</h3>
-<p>Сервис планирования целей по методологии 12 недель: от вектора на год до задач недели.</p>
-<div class="tags"><span class="tag role">PM / PO</span><span class="tag">SaaS</span><span class="tag">Web</span><span class="tag">Первый пет-проект</span></div></div>
+<div class="phone t1"><img src="/img/rg-lobby.webp" alt="Растущий город: лобби" width="645" height="1170"></div>
+<div class="phone t2"><img src="/img/rg-market.webp" alt="Растущий город: рынок и ход игрока" width="630" height="1030"></div></div>
+<dl class="rows">
+<div class="row"><dt>Задача</dt><dd>Для настольной игры нужна компания. Собрать людей в один момент трудно.</dd></div>
+<div class="row"><dt>Роль</dt><dd>Product Owner и Project Manager в одном лице: идея, правила, баланс, приоритеты, релизы, аналитика. Код писал с Claude и Cursor.</dd></div>
+<div class="row"><dt>Что сделано</dt><dd><ol><li>«Быстрая игра»: партия стартует сразу, свободные места занимают 6 ботов-персонажей.</li><li>Лобби по ссылке с PIN-кодом, 3 режима длины партии.</li><li>Баланс карт: две итерации. Туториал, чат с реакциями, исключение игроков.</li><li>Интерфейс на русском, английском и испанском.</li><li>Исправил блокировку соединения, потерю связи игрока и мобильную вёрстку.</li></ol></dd></div>
+<div class="row res"><dt>Результат</dt><dd><div class="tiles"><div class="tile"><b>50+</b><span>игроков</span></div><div class="tile"><b>2</b><span>поисковика: сайт подтверждён</span></div><div class="tile"><b>1</b><span>админ-панель с аналитикой партий</span></div></div><ul><li>Собственная аналитика партий.</li><li>Запуск на своём домене с SSL.</li><li>Хостинг не продлён, публичной ссылки сейчас нет.</li></ul></dd></div>
+<div class="row"><dt>Инструменты</dt><dd><div class="tools"><span>Claude</span><span>Cursor</span><span>React</span><span>Node.js</span><span>Socket.io</span><span>SQLite</span><span>nginx</span><span>Git</span></div></dd></div>
+<div class="row"><dt>Метрики</dt><dd><table><thead><tr><th>Метрика</th><th>Как считается</th><th>Цель</th></tr></thead><tbody><tr><td>Партии на игрока<span class="star">главная метрика</span></td><td>Завершённые партии на игрока в неделю</td><td class="t">3</td></tr><tr><td>Первая партия</td><td>Игроки, дошедшие до конца первой партии</td><td class="t">80%</td></tr><tr><td>Возврат на следующий день</td><td>Игроки, вернувшиеся на второй день</td><td class="t">25%</td></tr><tr><td>Время до старта</td><td>От нажатия до первого хода</td><td class="t">10 сек</td></tr></tbody></table><p class="note">Цели — ориентиры, которые я задал бы продукту. Это не измеренные результаты.</p></dd></div>
+<div class="row"><dt>Вывод</dt><dd>Запустил бы закрытый тест на 10–15 игроках и опрос после первой партии до расширения контента.</dd></div>
+</dl></div></details>
+<details class="case"><summary><div class="num">03</div><h3>Week12</h3><p class="one">Сервис планирования целей по методологии «12 недель».</p><div class="tags"><span class="tag role">Product Owner</span><span class="tag">Project Manager</span><span class="tag">Веб</span><span class="tag">Первый продукт</span></div><div class="peek"><div><small>Задача</small>Связать цель на год с задачами недели.</div><div class="r"><small>Результат</small>4 уровня целей, колесо жизни по 8 сферам, ретроспективы. Проект закрыт.</div></div><span class="chev"></span></summary><div class="more">
 <div class="stage w12">
-<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="img/w12-dashboard.png" alt="Week12: дашборд цикла" loading="lazy"></div>
+<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="/img/w12-dashboard.webp" alt="Week12: дашборд цикла" width="1280" height="713"></div>
 <div class="desk-row">
-<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="img/w12-landing.png" alt="Week12: лендинг" loading="lazy"></div>
-<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="img/w12-wheel.png" alt="Week12: колесо жизни" loading="lazy"></div>
-</div></div>
-<div class="body">
-<div><h4>Проблема</h4><p>Большие цели годами остаются мечтами: нет связи между видением, целями сезона и действиями этой недели.</p></div>
-<div><h4>Моя роль</h4><p>PM и PO. Перенёс консалтинговую методологию достижения целей в продукт: структура целей, механики дисциплины, требования к безопасности и персональным данным.</p></div>
-<div class="full"><h4>Что сделано</h4><ul>
-<li>Иерархия «вектор → цели года → цели сезона → задачи», дашборд с прогрессом цикла, фокусом недели и картой недель.</li>
-<li>Колесо жизни по 8 сферам, еженедельные ретроспективы, награда за завершённый сезон.</li>
-<li>Онбординг с самооценкой и тур по интерфейсу, email-уведомления, админ-панель с метриками.</li>
-<li>Требования 152-ФЗ: согласие на cookie и политика обработки данных; ограничение попыток входа в админку и права на уровне строк в базе.</li>
-</ul></div>
-<div><h4>Результат</h4><p>Рабочий продукт с полным циклом пользователя от регистрации до завершения сезона. Проект закрыт: был первым опытом сборки сервиса и проверкой методологии на практике.</p></div>
-<div><h4>Инструменты</h4><div class="tools"><span>Cursor</span><span>Next.js</span><span>TypeScript</span><span>Supabase</span><span>Vercel</span><span>Tailwind</span><span>shadcn/ui</span></div></div>
-<div class="full"><div class="hyp"><small>Рамка метрик: гипотезы, в проекте не измерялись</small>
-<b>North Star:</b> доля пользователей, закрывших не менее 70% задач недели. <b>Поддерживающие:</b> активация (первая цель создана в первый день), возврат в неделю 2 и 4, доля завершённых сезонов, число недельных ретроспектив.</div></div>
-<div class="full"><h4>Что бы сделал иначе</h4><p>Начал бы с проверки спроса: лендинг и 10 интервью до разработки полной иерархии целей.</p></div>
-</div>
-</article>
-
-
-<!-- OWN YOUR FUTURE -->
-<article class="case">
-<div class="case-head"><div class="num">04</div><h3>Own Your Future</h3>
-<p>Настольное приложение для Windows: время, потраченное на цели, превращается в этажи растущего города.</p>
-<div class="tags"><span class="tag role">PM / PO</span><span class="tag">Desktop</span><span class="tag">Геймификация</span><span class="tag">2026</span></div></div>
+<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="/img/w12-landing.webp" alt="Week12: главная страница" width="1280" height="535"></div>
+<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="/img/w12-wheel.webp" alt="Week12: колесо жизни" width="1280" height="509"></div></div></div>
+<dl class="rows">
+<div class="row"><dt>Задача</dt><dd>Большая цель теряется без связи с действиями недели.</dd></div>
+<div class="row"><dt>Роль</dt><dd>Product Owner и Project Manager. Перенёс консалтинговую методологию достижения целей в сервис.</dd></div>
+<div class="row"><dt>Что сделано</dt><dd><ol><li>Иерархия целей: вектор, цели года, цели сезона, задачи.</li><li>Дашборд: прогресс цикла, фокус недели, карта 12 недель.</li><li>Колесо жизни по 8 сферам, еженедельные ретроспективы, награда за завершённый сезон.</li><li>Онбординг с самооценкой, письма-напоминания, админ-панель.</li><li>Требования 152-ФЗ: согласие на cookie, политика обработки данных.</li></ol></dd></div>
+<div class="row res"><dt>Результат</dt><dd><div class="tiles"><div class="tile"><b>4</b><span>уровня целей</span></div><div class="tile"><b>12</b><span>недель в цикле</span></div><div class="tile"><b>8</b><span>сфер жизни</span></div><div class="tile"><b>1</b><span>полный путь пользователя</span></div></div><ul><li>Рабочий путь от регистрации до завершения сезона.</li><li>Защита: ограничение попыток входа в админку, права на уровне строк в базе.</li><li>Проект закрыт. Был проверкой методологии на практике.</li></ul></dd></div>
+<div class="row"><dt>Инструменты</dt><dd><div class="tools"><span>Cursor</span><span>Next.js</span><span>TypeScript</span><span>Supabase</span><span>Vercel</span><span>Tailwind</span></div></dd></div>
+<div class="row"><dt>Метрики</dt><dd><table><thead><tr><th>Метрика</th><th>Как считается</th><th>Цель</th></tr></thead><tbody><tr><td>Выполнение недели<span class="star">главная метрика</span></td><td>Выполненные задачи недели / запланированные</td><td class="t">70%</td></tr><tr><td>Активация</td><td>Создана первая цель в день регистрации</td><td class="t">70%</td></tr><tr><td>Возврат на 2-й неделе</td><td>Пользователи, вернувшиеся на 2-й неделе</td><td class="t">40%</td></tr><tr><td>Завершённые сезоны</td><td>Сезоны, дошедшие до недели 12</td><td class="t">15%</td></tr></tbody></table><p class="note">Цели — ориентиры, которые я задал бы продукту. Это не измеренные результаты.</p></dd></div>
+<div class="row"><dt>Вывод</dt><dd>Начал бы с проверки спроса: страница с описанием и 10 интервью до разработки полной иерархии целей.</dd></div>
+</dl></div></details>
+<details class="case"><summary><div class="num">04</div><h3>Own Your Future</h3><p class="one">Приложение для Windows: время на цели превращается в этажи города.</p><div class="tags"><span class="tag role">Product Owner</span><span class="tag">Project Manager</span><span class="tag">Windows</span><span class="tag">Игровая механика</span></div><div class="peek"><div><small>Задача</small>Показать накопленный прогресс по долгим целям.</div><div class="r"><small>Результат</small>Рабочая версия: таймер, город, монеты, серия дней.</div></div><span class="chev"></span></summary><div class="more">
 <div class="stage oyf">
-<div class="widget"><img src="img/oyf-timer.png" alt="Own Your Future: таймер сессии"></div>
-<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="img/oyf-city.png" alt="Own Your Future: город и активная сессия"></div>
-</div>
-<div class="body">
-<div><h4>Проблема</h4><p>Прогресс по долгим целям (язык, навык, карьера) не виден: часы потрачены, а ощущения роста нет. Обычные таймеры считают время, но не показывают накопленный результат.</p></div>
-<div><h4>Моя роль</h4><p>PM и PO. Написал продуктовый бриф, определил механику, приоритеты версий и требования к интерфейсу, вёл разработку с помощью AI-инструментов.</p></div>
-<div class="full"><h4>Что сделано</h4><ul>
-<li>Механика: каждая сессия добавляет этаж, высота этажа пропорциональна времени, цель измеряется в часах до нужного уровня.</li>
-<li>Три основных направления и пользовательские: «Работа», «Развитие», «Развлечения». За завершённые этажи начисляются монеты, на них строятся здания для отдыха.</li>
-<li>Решение: здание никогда не «закрывается», цель только маркер, поэтому навык можно растить дальше.</li>
-<li>Компактный виджет без системной рамки, фиксированного размера, плюс экран города со статистикой дня и серией.</li>
-</ul></div>
-<div><h4>Результат</h4><p>Рабочий прототип для личного использования на Windows: таймер, город, настройки, экономика монет.</p></div>
-<div><h4>Инструменты</h4><div class="tools"><span>Claude</span><span>GitHub</span><span>Product Brief</span></div></div>
-<div class="full"><div class="hyp"><small>Рамка метрик: гипотезы, в проекте не измерялись</small>
-<b>North Star:</b> часы целевой работы на активного пользователя в неделю. <b>Поддерживающие:</b> доля дней с хотя бы одной завершённой сессией, длина серии, доля сессий, завершённых по плану, возврат на 7-й день.</div></div>
-<div class="full"><h4>Что бы сделал иначе</h4><p>Проверил бы механику монет и зданий на 5–10 людях до разработки экрана города: она задаёт всю экономику продукта.</p></div>
-</div>
-</article>
-
-<h2 class="sec" id="about">Обо мне</h2>
-<section class="about">
-<div>
-<p>Менеджер проектов в IT-консалтинге и финтехе. Веду платформу банковских расчётов: три команды, бюджет, нагрузка, эскалации заказчика.</p>
-<p>Запускал AI-продукт для казначейства в «Технологиях Доверия» и корпоративную базу знаний с поиском на RAG в СИБУРе, ею пользуются около 20 000 человек.</p>
-<p>Личные продукты собираю сам: от идеи и исследования до рабочего релиза. Юридическое образование помогает работать с требованиями и рисками.</p>
-</div>
-<div class="contacts" id="contact">
-<a href="https://t.me/andrew_727">Telegram: @andrew_727</a>
-<a href="mailto:perepechayandrew@gmail.com">perepechayandrew@gmail.com</a>
-<a href="tel:+79163448547">+7 (916) 344-85-47</a>
-</div>
-</section>
-<footer>© 2026 Андрей Перепечай</footer>
-</main>
-</body>
-</html>
+<div class="widget"><img src="/img/oyf-timer.webp" alt="Own Your Future: таймер сессии" width="528" height="854"></div>
+<div class="desk"><div class="bar"><i></i><i></i><i></i></div><img src="/img/oyf-city.webp" alt="Own Your Future: город и активная сессия" width="1280" height="844"></div></div>
+<dl class="rows">
+<div class="row"><dt>Задача</dt><dd>Таймеры считают часы, но не показывают накопленный результат по долгой цели.</dd></div>
+<div class="row"><dt>Роль</dt><dd>Product Owner и Project Manager. Продуктовый бриф, механика, приоритеты версий, требования к интерфейсу. Разработка с Claude.</dd></div>
+<div class="row"><dt>Что сделано</dt><dd><ol><li>Механика: одна сессия добавляет этаж, высота пропорциональна времени.</li><li>3 направления: «Работа», «Развитие», «Развлечения», плюс свои.</li><li>Монеты за этажи, здания для отдыха на монеты.</li><li>Здание не закрывается: цель только маркер, навык можно растить дальше.</li><li>Окно-виджет без системной рамки, фиксированного размера.</li></ol></dd></div>
+<div class="row res"><dt>Результат</dt><dd><div class="tiles"><div class="tile"><b>3</b><span>направления</span></div><div class="tile"><b>3</b><span>раздела: таймер, город, настройки</span></div><div class="tile"><b>1</b><span>экономика монет</span></div></div><ul><li>Рабочая версия для Windows: таймер, город, настройки.</li></ul></dd></div>
+<div class="row"><dt>Инструменты</dt><dd><div class="tools"><span>Claude</span><span>GitHub</span></div></dd></div>
+<div class="row"><dt>Метрики</dt><dd><table><thead><tr><th>Метрика</th><th>Как считается</th><th>Цель</th></tr></thead><tbody><tr><td>Часы в неделю<span class="star">главная метрика</span></td><td>Часы целевой работы на активного пользователя в неделю</td><td class="t">7</td></tr><tr><td>Дни с сессией</td><td>Дни в неделю с хотя бы одной завершённой сессией</td><td class="t">5 из 7</td></tr><tr><td>План</td><td>Сессии, завершённые по плану</td><td class="t">80%</td></tr><tr><td>Возврат на 7-й день</td><td>Пользователи, вернувшиеся на 7-й день</td><td class="t">30%</td></tr></tbody></table><p class="note">Цели — ориентиры, которые я задал бы продукту. Это не измеренные результаты.</p></dd></div>
+<div class="row"><dt>Вывод</dt><dd>Проверил бы механику монет и зданий на 5–10 людях до экрана города: она задаёт экономику продукта.</dd></div>
+</dl></div></details>
+<div class="sechead"><h2 class="sec" id="about">Опыт</h2></div><div class="exp">
+<div><b>Axenix, Project Manager</b><span>Платформа банковских расчётов. Три команды по 10 человек. Бюджет, загрузка команд, эскалации заказчика.</span></div>
+<div><b>Технологии Доверия</b><span>Запуск пробной версии продукта на нейросетях для казначейства. Исследование рынка цифровых финансовых активов: регулирование и кейсы.</span></div>
+<div><b>СИБУР</b><span>Корпоративная база знаний с поиском на нейросети. Подключена вся компания, около 20 000 пользователей.</span></div>
+<div><b>Образование</b><span>Юридическое: правовое обеспечение национальной безопасности.</span></div>
+</div><div class="sechead"><h2 class="sec" id="contact">Контакты</h2></div><div class="contacts"><a href="https://t.me/andrew_727">Telegram: @andrew_727</a><a href="mailto:perepechayandrew@gmail.com">perepechayandrew@gmail.com</a><a href="tel:+79163448547">+7 (916) 344-85-47</a></div>
+<footer>© 2026 Андрей Перепечай</footer></main>
+<script>var tg=document.getElementById('tg'),ds=[].slice.call(document.querySelectorAll('details.case'));function sync(){var all=ds.every(function(d){return d.open});tg.textContent=all?tg.dataset.c:tg.dataset.e}tg.addEventListener('click',function(){var all=ds.every(function(d){return d.open});ds.forEach(function(d){d.open=!all});sync()});ds.forEach(function(d){d.addEventListener('toggle',sync)});sync();</script></body></html>
