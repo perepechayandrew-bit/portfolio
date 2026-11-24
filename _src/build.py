@@ -308,7 +308,7 @@ dialog[open]::backdrop{animation:fade .35s ease}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
 .panel[hidden]{display:none}
-.btn.tg{background:#229ED9;border-color:#229ED9;color:#fff;display:inline-flex;align-items:center;gap:8px;margin-left:auto;font-weight:600;box-shadow:0 4px 14px rgba(34,158,217,.35)}
+.btn.tg{background:#229ED9;border-color:#229ED9;color:#fff;display:inline-flex;align-items:center;gap:8px;font-weight:600;box-shadow:0 4px 14px rgba(34,158,217,.35)}
 .btn.tg:hover{background:#1b8cc2}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:26px}
 .fact{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--soft)}
@@ -406,7 +406,7 @@ def page(L):
     o.append('<style>%s</style>\n</head>\n<body>\n<script>document.documentElement.classList.add("js")</script>' % CSS)
     nav = ''.join('<a class="nl" href="%s">%s</a>' % (h, E(t)) for h, t in L['nav'])
     o.append('<header class="top"><div class="wrap"><b>%s</b><nav>%s<div class="lang"><span>%s</span><a href="%s" onclick="%s">%s</a></div></nav></div></header>' % (E(L['name']), nav, L['cur_label'], L['alt_url'], setlang, L['alt_label']))
-    o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn dark" href="#projects">%s</a><a class="btn" href="#experience">%s</a><a class="btn tg" href="https://t.me/andrew_727"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3 18.6 19.6c-.2 1.1-.9 1.3-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6.1 13 1.2 11.5c-1.1-.3-1.1-1 .2-1.5L20.5 2.6c.9-.3 1.7.2 1.4 1.7z"/></svg>%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), lead_html(L), E(L['b_proj']), E(L['b_exp']), E(L['b_tg'])))
+    o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn tg" href="https://t.me/andrew_727"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3 18.6 19.6c-.2 1.1-.9 1.3-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6.1 13 1.2 11.5c-1.1-.3-1.1-1 .2-1.5L20.5 2.6c.9-.3 1.7.2 1.4 1.7z"/></svg>%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), lead_html(L), E(L['b_tg'])))
     for i, (b, t) in enumerate(L['facts']):
         st = ' style="border-top:3px solid %s"' % BRAND[i]['c'] if i < 2 else ''
         o.append('<div class="fact"%s><b>%s</b><span>%s</span></div>' % (st, E(b), E(t)))
