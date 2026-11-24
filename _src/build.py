@@ -7,6 +7,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 E = html.escape
 
 # Палитра компаний. Оттенки приблизительные: чтобы поменять, исправь HEX здесь и запусти build.py
+PCOL = {'joyka':'#3FA75A','rg':'#B5532F','w12':'#5B6575','oyf':'#7B5CD6'}
 BRAND = [
  dict(c='#F26A1B', ct='#B8480C', tint='#FFF2E9', line='#F8CDB0'),   # Axenix: оранжевый
  dict(c='#0B72B9', ct='#0B5E9A', tint='#E9F3FB', line='#B8D9F0'),   # СИБУР: синий
@@ -248,6 +249,12 @@ nav a:hover{color:var(--ink)}
 .fact span{display:block;margin-top:5px;font-size:13.5px;color:var(--mute)}
 h2.sec{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:600;margin:44px 0 6px}
 p.sub{font-size:14.5px;color:var(--mute);margin-bottom:14px}
+.own{background:#f2f1fb;border:1px solid #dcd9f3;border-radius:26px;padding:24px 22px 22px;margin-top:44px}
+.own-h{display:flex;align-items:center;gap:10px}
+.own-h h2{font-size:22px;letter-spacing:-.01em}
+.own-h .cnt{font-size:13px;font-weight:600;color:#fff;background:#6b5bd6;border-radius:999px;padding:1px 10px}
+.own p.sub{margin-top:4px}
+.own .card{box-shadow:0 1px 0 rgba(20,22,26,.04),0 8px 24px rgba(80,70,160,.08)}
 .xp{border:1px solid var(--line);border-left:5px solid var(--c);border-radius:18px;padding:20px 22px;margin-top:12px}
 .xp-h{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
 .xp-h b{font-size:18px;display:flex;align-items:center;gap:9px}.xp-h .dot{width:12px;height:12px;border-radius:50%;background:var(--c);display:inline-block}.xp-h span{font-size:13px;color:var(--ct);background:var(--tint);border:1px solid var(--line2);border-radius:999px;padding:2px 11px}
@@ -284,7 +291,7 @@ p.sub{font-size:14.5px;color:var(--mute);margin-bottom:14px}
 footer{margin:44px 0 32px;color:var(--mute);font-size:13px}
 dialog{border:none;border-radius:20px;padding:0;max-width:860px;width:calc(100% - 24px);max-height:92vh;margin:auto;color:var(--ink)}
 dialog::backdrop{background:rgba(20,22,26,.55)}
-.dh{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+.dh{border-top:0;position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;z-index:2}
 .dh h3{font-size:20px}
 .dh button{font:inherit;font-size:14px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 14px;cursor:pointer}
 .db{padding:6px 22px 22px}
@@ -334,12 +341,12 @@ def page(L):
         o.append('<div class="xrow"><dt>%s</dt><dd>%s</dd></div>' % (E(xl['resp']), E(x['resp'])))
         o.append('<div class="xrow res"><dt>%s</dt><dd><ul>%s</ul></dd></div></dl></article>' % (E(xl['res']), li(x['res'])))
     # проекты
-    o.append('<h2 class="sec" id="projects">%s</h2><p class="sub">%s</p><div class="grid">' % (E(L['proj_h']), E(L['proj_sub'])))
+    o.append('<section class="own" id="projects"><div class="own-h"><h2>%s</h2><span class="cnt">%d</span></div><p class="sub">%s</p><div class="grid">' % (E(L['proj_h']), len(L['projects']), E(L['proj_sub'])))
     pl = L['p_lbl']
     for p in L['projects']:
-        o.append('<article class="card">%s<div class="cb"><h3>%s</h3><p class="d">%s</p><dl><dt>%s</dt><dd>%s</dd><dt>%s</dt><dd>%s</dd><dt>%s</dt><dd class="r">%s</dd></dl><button class="btn" type="button" data-open="%s">%s</button></div></article>' % (
-            cover(p['id'], p['alts'][0]), E(p['name']), E(p['desc']), E(pl['role']), E(p['role']), E(pl['stage']), E(p['stage']), E(pl['res']), E(p['res_short']), p['id'], E(pl['more'])))
-    o.append('</div>')
+        o.append('<article class="card" style="border-top:4px solid %s">%s<div class="cb"><h3>%s</h3><p class="d">%s</p><dl><dt>%s</dt><dd>%s</dd><dt>%s</dt><dd>%s</dd><dt>%s</dt><dd class="r">%s</dd></dl><button class="btn" type="button" data-open="%s">%s</button></div></article>' % (
+            PCOL[p['id']], cover(p['id'], p['alts'][0]), E(p['name']), E(p['desc']), E(pl['role']), E(p['role']), E(pl['stage']), E(p['stage']), E(pl['res']), E(p['res_short']), p['id'], E(pl['more'])))
+    o.append('</div></section>')
     # навыки
     o.append('<h2 class="sec" id="skills">%s</h2><div class="sk">' % E(L['sk_h']))
     for t, items in L['skills']:
