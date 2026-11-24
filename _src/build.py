@@ -265,7 +265,8 @@ nav a:hover{color:var(--ink)}
 .hero{padding:44px 0 8px}
 .hero .role{font-size:14px;color:var(--ok);font-weight:600;letter-spacing:.02em}
 .hero h1{font-size:clamp(28px,4.2vw,40px);line-height:1.12;letter-spacing:-.02em;font-weight:700;margin-top:6px}
-.hero p.lead{margin-top:12px;font-size:17px;color:var(--mute);max-width:660px}
+.hero p.lead{margin-top:14px;font-size:18px;line-height:1.6;color:var(--mute);max-width:none}
+.hero p.lead b{white-space:nowrap;color:var(--ink);font-weight:700;background:linear-gradient(transparent 62%,#ffe58a 62%);padding:0 2px;border-radius:2px}
 .cta{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-block;padding:9px 18px;border-radius:999px;font-size:14.5px;font-weight:500;text-decoration:none;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;font-family:inherit}
 .btn.dark{background:var(--ink);color:#fff}
@@ -382,6 +383,15 @@ dialog::backdrop{background:rgba(20,22,26,.55)}
 
 def li(items): return ''.join('<li>%s</li>' % E(x) for x in items)
 
+HL = {'ru':['более 250 млн руб.','3 команды разработки','около 30 человек','5 квартальных поставок подряд','20 000 пользователей','в 4 раза'],
+      'en':['above 250 million RUB','3 development teams','about 30 people','5 quarterly deliveries in a row','20,000 users','by 4 times']}
+def lead_html(L):
+    t = E(L['lead'])
+    for k in HL[L['lang']]:
+        assert E(k) in t, k
+        t = t.replace(E(k), '<b>%s</b>' % E(k))
+    return t
+
 def page(L):
     detect = ("<script>try{var s=localStorage.getItem('lang'),n=((navigator.languages&&navigator.languages[0])||navigator.language||'ru').toLowerCase();"
               "if(s==='en'||(!s&&n.indexOf('en')===0)){location.replace('/en/')}}catch(e){}</script>") if L['lang']=='ru' else \
@@ -394,7 +404,7 @@ def page(L):
     o.append('<style>%s</style>\n</head>\n<body>\n<script>document.documentElement.classList.add("js")</script>' % CSS)
     nav = ''.join('<a class="nl" href="%s">%s</a>' % (h, E(t)) for h, t in L['nav'])
     o.append('<header class="top"><div class="wrap"><b>%s</b><nav>%s<div class="lang"><span>%s</span><a href="%s" onclick="%s">%s</a></div></nav></div></header>' % (E(L['name']), nav, L['cur_label'], L['alt_url'], setlang, L['alt_label']))
-    o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn dark" href="#projects">%s</a><a class="btn" href="#experience">%s</a><a class="btn tg" href="https://t.me/andrew_727"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3 18.6 19.6c-.2 1.1-.9 1.3-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6.1 13 1.2 11.5c-1.1-.3-1.1-1 .2-1.5L20.5 2.6c.9-.3 1.7.2 1.4 1.7z"/></svg>%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), E(L['lead']), E(L['b_proj']), E(L['b_exp']), E(L['b_tg'])))
+    o.append('<main class="wrap"><section class="hero"><div class="role">%s</div><h1>%s</h1><p class="lead">%s</p><div class="cta"><a class="btn dark" href="#projects">%s</a><a class="btn" href="#experience">%s</a><a class="btn tg" href="https://t.me/andrew_727"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3 18.6 19.6c-.2 1.1-.9 1.3-1.8.8l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6.1 13 1.2 11.5c-1.1-.3-1.1-1 .2-1.5L20.5 2.6c.9-.3 1.7.2 1.4 1.7z"/></svg>%s</a></div><div class="facts">' % (E(L['role']), E(L['name']), lead_html(L), E(L['b_proj']), E(L['b_exp']), E(L['b_tg'])))
     for i, (b, t) in enumerate(L['facts']):
         st = ' style="border-top:3px solid %s"' % BRAND[i]['c'] if i < 2 else ''
         o.append('<div class="fact"%s><b>%s</b><span>%s</span></div>' % (st, E(b), E(t)))
