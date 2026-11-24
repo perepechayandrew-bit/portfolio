@@ -41,15 +41,15 @@ def gallery(kind, alts):
 RU = dict(
  lang='ru', name='Андрей Перепечай',
  title='Андрей Перепечай — Product Owner & Project Manager',
- desc='Product Owner. Корпоративные ИТ-проекты, пять собственных продуктов: задача, роль, результат.',
+ desc='Product Owner. Корпоративные ИТ-проекты, пять пет-продуктов вне основной работы: задача, роль, результат.',
  alt_url='/en/', alt_label='EN', cur_label='RU',
- nav=[('#projects','Продукты'),('#experience','Проекты'),('#skills','Навыки'),('#contact','Контакты')],
+ nav=[('#projects','Пет-продукты'),('#experience','Проекты'),('#skills','Навыки'),('#contact','Контакты')],
  role='Product Owner & Project Manager',
  lead='Project Manager в банковском и корпоративном IT: проекты с бюджетом более 250 млн руб., 3 команды разработки (около 30 человек). Закрыл 5 квартальных поставок подряд в срок и в согласованном объёме. Вёл два ИИ-продукта: корпоративную базу знаний с нейросетевым поиском на 20 000 пользователей и ML-сервис прогнозирования для казначейства. Использую нейросети в работе: сократил подготовку отчётности в 4 раза, сам запускаю продукты без команды.',
- b_exp='Проекты', b_proj='Продукты', b_tg='Написать в Telegram',
+ b_exp='Проекты', b_proj='Пет-продукты', b_tg='Написать в Telegram',
  facts=[('≈260 млн руб.','бюджет платформы банковских взаиморасчётов. 3 команды, около 30 человек. Axenix.'),
         ('≈20 000','пользователей корпоративной базы знаний с нейросетевым поиском. СИБУР.'),
-        ('5 продуктов','собственные продукты от идеи до запуска. Один в App Store, одна онлайн-игра с 50+ игроками.')],
+        ('5 пет-продуктов','личные проекты вне основной работы, от идеи до запуска. Один в App Store, одна онлайн-игра с 50+ игроками.')],
  exp_h='Опыт работы',
  x_lbl=dict(project='Проект', scale='Масштаб', resp='Ответственность', res='Результаты'),
  exp=[
@@ -69,7 +69,7 @@ RU = dict(
        resp='Бюджет и сроки, контрольные точки, бэклог из 100+ гипотез (Jira, приоритизация RICE), планирование спринтов, груминг, обзоры спринтов, подрядчики, обучение пользователей.',
        res=['Контрольные точки пройдены с отклонением по бюджету менее 15%.','Процесс подготовки к контрольным точкам в Confluence: экономия около 7 человеко-дней на каждой квартальной точке.','Рост ежедневных активных пользователей (DAU) на 15% за счёт обучения и коммуникаций.']),
  ],
- proj_h='Собственные продукты', proj_sub='Пять продуктов, которые я придумал, описал и вывел в рабочую версию.',
+ proj_h='Пет-продукты', proj_sub='Личные проекты вне основной работы: пять продуктов, которые я придумал, описал и вывел в рабочую версию.',
  p_lbl=dict(role='Роль',stage='Стадия',res='Результат',more='Подробнее'),
  d_lbl=dict(about='О продукте',problem='Проблема пользователя',role='Моя роль',done='Что сделано',result='Результат',metrics='Метрики и аналитика',fact='Фактически',main='Главная метрика',aux='Вспомогательные',events='События для сбора',close='Закрыть'),
  projects=[
@@ -145,15 +145,15 @@ RU = dict(
 EN = dict(
  lang='en', name='Andrey Perepechay',
  title='Andrey Perepechay — Product Owner & Project Manager',
- desc='Product Owner. Enterprise IT projects and five products of my own: problem, role, result.',
+ desc='Product Owner. Enterprise IT projects and five side products outside my main job: problem, role, result.',
  alt_url='/', alt_label='RU', cur_label='EN',
- nav=[('#projects','Products'),('#experience','Projects'),('#skills','Skills'),('#contact','Contact')],
+ nav=[('#projects','Side products'),('#experience','Projects'),('#skills','Skills'),('#contact','Contact')],
  role='Product Owner & Project Manager',
  lead='Project Manager in banking and corporate IT: projects with a budget above 250 million RUB, 3 development teams (about 30 people). Closed 5 quarterly deliveries in a row on time and in the agreed scope. Led two products with AI: a corporate knowledge base with AI search (LLM, RAG) for 20,000 users and an ML forecasting service for treasury. I use AI at work: cut report preparation time by 4 times, and I launch products on my own without a team.',
- b_exp='Projects', b_proj='Products', b_tg='Message on Telegram',
+ b_exp='Projects', b_proj='Side products', b_tg='Message on Telegram',
  facts=[('≈260 M RUB','budget of a bank settlements platform. 3 teams, about 30 people. Axenix.'),
         ('≈20,000','users of a corporate knowledge base with AI search. SIBUR.'),
-        ('5 products','my own products from idea to launch. One in the App Store, one online game with 50+ players.')],
+        ('5 side products','personal projects outside my main job, from idea to launch. One in the App Store, one online game with 50+ players.')],
  exp_h='Experience',
  x_lbl=dict(project='Project', scale='Scale', resp='Responsibility', res='Results'),
  exp=[
@@ -173,7 +173,7 @@ EN = dict(
        resp='Budget and timeline, checkpoints, a backlog of 100+ hypotheses (Jira, RICE prioritization), sprint planning, grooming, sprint reviews, contractors, user training.',
        res=['Checkpoints passed with budget deviation under 15%.','Checkpoint preparation process in Confluence: about 7 person-days saved at each quarterly checkpoint.','Daily active users (DAU) up 15% through training and communication.']),
  ],
- proj_h='Products of my own', proj_sub='Five products I defined, specified and brought to a working version.',
+ proj_h='Side products', proj_sub='Personal projects outside my main job: five products I defined, specified and brought to a working version.',
  p_lbl=dict(role='Role',stage='Stage',res='Result',more='Details'),
  d_lbl=dict(about='About the product',problem='User problem',role='My role',done='What I did',result='Result',metrics='Metrics and analytics',fact='Actual',main='Primary metric',aux='Supporting metrics',events='Events to collect',close='Close'),
  projects=[
@@ -276,6 +276,8 @@ nav a:hover{color:var(--ink)}
 .tabs .ind{position:absolute;top:4px;bottom:4px;left:0;width:0;border-radius:999px;background:var(--ink);transition:transform .45s cubic-bezier(.22,1,.36,1),width .45s cubic-bezier(.22,1,.36,1);z-index:0}
 .tabs button{position:relative;z-index:1;transition:color .3s}
 .tabs button.on{color:#fff}
+.tabs:not(.ready) button.on{background:var(--ink)}
+.tabs.ready button.on{background:transparent}
 .panel{transition:opacity .2s ease,transform .2s ease}
 .panel.leave{opacity:0;transform:translateY(-8px)}
 .panel.enter{animation:panelIn .55s cubic-bezier(.22,1,.36,1)}
@@ -463,12 +465,12 @@ function open(id){var d=ds['d-'+id];if(d&&!d.open){d.showModal();try{history.rep
 });
 var tb=document.querySelectorAll('[data-tab]');
 var ind=document.querySelector('.tabs .ind'),cur='prod',tk=0;
-function mv(){var b=document.querySelector('.tabs .on');if(b&&ind){ind.style.width=b.offsetWidth+'px';ind.style.transform='translateX('+(b.offsetLeft-4)+'px)'}}
+function mv(){var b=document.querySelector('.tabs .on');if(b&&ind&&b.offsetWidth>0){ind.style.width=b.offsetWidth+'px';ind.style.transform='translateX('+(b.offsetLeft-4)+'px)';ind.parentNode.classList.add('ready')}}
 function tab(n){if(n===cur)return;var from=document.getElementById('p-'+cur),to=document.getElementById('p-'+n),t=++tk;cur=n;
  [].forEach.call(tb,function(b){b.classList.toggle('on',b.dataset.tab===n)});mv();
  from.classList.add('leave');
  setTimeout(function(){if(t!==tk)return;from.hidden=true;from.classList.remove('leave');to.hidden=false;to.classList.remove('enter');void to.offsetWidth;to.classList.add('enter')},200)}
-mv();window.addEventListener('load',mv);window.addEventListener('resize',mv);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(mv);
+mv();window.addEventListener('load',mv);window.addEventListener('resize',mv);if(window.ResizeObserver&&ind)new ResizeObserver(mv).observe(ind.parentNode);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(mv);
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
  [].forEach.call(document.querySelectorAll('.contacts,.tabs,.xp,.card,.sk,.own-h,h2.sec'),function(el){el.classList.add('rv');io.observe(el)})}
 [].forEach.call(tb,function(b){b.addEventListener('click',function(){tab(b.dataset.tab)})});
