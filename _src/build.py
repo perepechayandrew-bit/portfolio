@@ -124,7 +124,7 @@ RU = dict(
  skills=[('Управление проектами',['Бюджет и финансовая модель','Сроки и ресурсы','Риски и зависимости','Работа с заказчиком','Scrum: планирование, груминг, обзоры спринтов']),
          ('Продуктовая работа',['Исследование пользователей и рынка','Гипотезы и приоритизация (RICE)','Бэклог и требования','Минимально жизнеспособный продукт (MVP)','Продуктовая аналитика']),
          ('Нейросети и инструменты',['Поиск на больших языковых моделях (RAG)','Прогнозирование на машинном обучении','Claude, Cursor','Jira, Confluence'])],
- c_h='Контакты',
+ c_h='Контакты', phone='Телефон',
 )
 
 # =================================================================== EN
@@ -216,7 +216,7 @@ EN = dict(
  skills=[('Project management',['Budget and financial model','Timeline and resources','Risks and dependencies','Customer communication','Scrum: planning, grooming, sprint reviews']),
          ('Product work',['User and market research','Hypotheses and prioritization (RICE)','Backlog and requirements','Minimum viable product (MVP)','Product analytics']),
          ('AI and tools',['Search on large language models (RAG)','Forecasting with machine learning','Claude, Cursor','Jira, Confluence'])],
- c_h='Contact',
+ c_h='Contact', phone='Phone',
 )
 
 CSS = r'''
@@ -282,12 +282,16 @@ p.sub{font-size:14.5px;color:var(--mute);margin-bottom:14px}
 .card dt{color:var(--mute)}
 .card dd.r{color:var(--ok);font-weight:600}
 .card .btn{margin-top:auto;align-self:flex-start}
-.sk{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.sk div{border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.sk{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:20px;background:#fff;overflow:hidden}
+.sk div{padding:18px 20px;border-left:1px solid var(--line)}
+.sk div:first-child{border-left:0}
 .sk b{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:8px}
 .sk span{display:inline-block;font-size:13.5px;padding:3px 10px;border-radius:8px;background:var(--soft);border:1px solid var(--line);margin:0 5px 6px 0}
-.contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:10px}
-.contacts a{display:block;padding:14px 16px;border:1px solid var(--line);border-radius:12px;text-decoration:none;font-weight:500;background:var(--soft);font-size:14.5px}
+.contacts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:10px;border:1px solid var(--line);border-radius:20px;background:var(--soft);overflow:hidden}
+.contacts a{display:block;padding:18px 20px;border-left:1px solid var(--line);text-decoration:none;font-weight:500;font-size:14.5px}
+.contacts a:first-child{border-left:0}
+.contacts a:hover{background:#eceef2}
+.contacts small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:600;margin-bottom:4px}
 footer{margin:44px 0 32px;color:var(--mute);font-size:13px}
 dialog{border:none;border-radius:20px;padding:0;max-width:860px;width:calc(100% - 24px);max-height:92vh;margin:auto;color:var(--ink)}
 dialog::backdrop{background:rgba(20,22,26,.55)}
@@ -308,7 +312,7 @@ dialog::backdrop{background:rgba(20,22,26,.55)}
 .m3 div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;background:var(--soft)}
 .m3 small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:4px;font-weight:600}
 .m3 ul{padding-left:16px}
-@media(max-width:760px){.grid,.sk{grid-template-columns:1fr}.xrow,.drow{grid-template-columns:1fr}.m3{grid-template-columns:1fr}nav a.nl{display:none}.db{padding:4px 16px 18px}.gal .g-m{width:130px}.gal .g-d{width:260px}}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.sk,.contacts{grid-template-columns:1fr}.sk div,.contacts a{border-left:0;border-top:1px solid var(--line)}.sk div:first-child,.contacts a:first-child{border-top:0}.xrow,.drow{grid-template-columns:1fr}.m3{grid-template-columns:1fr}nav a.nl{display:none}.db{padding:4px 16px 18px}.gal .g-m{width:130px}.gal .g-d{width:260px}}
 '''
 
 def li(items): return ''.join('<li>%s</li>' % E(x) for x in items)
@@ -352,7 +356,7 @@ def page(L):
     for t, items in L['skills']:
         o.append('<div><b>%s</b>%s</div>' % (E(t), ''.join('<span>%s</span>' % E(i) for i in items)))
     o.append('</div>')
-    o.append('<h2 class="sec" id="contact">%s</h2><div class="contacts"><a href="https://t.me/andrew_727">Telegram: @andrew_727</a><a href="mailto:perepechayandrew@gmail.com">perepechayandrew@gmail.com</a><a href="tel:+79163448547">+7 (916) 344-85-47</a></div>' % E(L['c_h']))
+    o.append('<h2 class="sec" id="contact">%s</h2><div class="contacts"><a href="https://t.me/andrew_727"><small>Telegram</small>@andrew_727</a><a href="mailto:perepechayandrew@gmail.com"><small>Email</small>perepechayandrew@gmail.com</a><a href="tel:+79163448547"><small>%s</small>+7 (916) 344-85-47</a></div>' % (E(L['c_h']), E(L['phone'])))
     o.append('<footer>© 2026 %s</footer></main>' % E(L['name']))
     # диалоги
     dl = L['d_lbl']
